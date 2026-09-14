@@ -1,0 +1,30 @@
+{
+    "biomarkers": {
+        "alt_u_l": {
+            "wasserstein_dist": 137.49623189572947,
+            "kl_divergence": 0.8187458043664616,
+            "synth_mean": 171.93,
+            "synth_var": 39425.768099999994
+        },
+        "ast_u_l": {
+            "wasserstein_dist": 120.96006458884575,
+            "kl_divergence": 0.34883125097729206,
+            "synth_mean": 151.58999999999997,
+            "synth_var": 30145.3489
+        },
+        "total_bilirubin_mg_dl": {
+            "wasserstein_dist": 1.3368069993400935,
+            "kl_divergence": 0.5171098415947402,
+            "synth_mean": 2.21,
+            "synth_var": 4.517899999999999
+        },
+        "ctdna_vaf": {
+            "wasserstein_dist": 0.047948550744547895
+        }
+    },
+    "mode_collapse": {
+        "uniqueness_ratio": 1.0,
+        "total_samples": 20,
+        "unique_samples": 20
+    }
+}

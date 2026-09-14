@@ -1,0 +1,9 @@
+{
+    "pca_variance_explained": [
+        0.5860510797186357,
+        0.23256379864659918
+    ],
+    "ood_samples_count": 0,
+    "compound_mutation_cases": 14,
+    "total_cases": 20
+}

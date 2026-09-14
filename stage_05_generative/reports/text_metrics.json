@@ -1,0 +1,10 @@
+{
+    "total_notes": 20,
+    "mean_token_length": 46.8,
+    "median_token_length": 47.0,
+    "std_token_length": 2.379075450674064,
+    "vocabulary_size": 177,
+    "type_token_ratio": 0.1891025641025641,
+    "dili_mention_rate": 1.0,
+    "resistance_mention_rate": 0.4
+}

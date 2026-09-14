@@ -1,0 +1,64 @@
+{
+  "target_classes": [
+    "Low",
+    "Moderate",
+    "High"
+  ],
+  "test_accuracy": 0.9875,
+  "test_f1": 0.9875,
+  "test_roc_auc": 0.9992,
+  "high_risk_recall": 0.98,
+  "brier_score": 0.016,
+  "top_features": [
+    {
+      "Feature": "mutation_count",
+      "Importance_Mean": 0.2765,
+      "Importance_Std": 0.02118962010041712
+    },
+    {
+      "Feature": "dosage_mg",
+      "Importance_Mean": 0.16050000000000006,
+      "Importance_Std": 0.01258967831201417
+    },
+    {
+      "Feature": "temperature",
+      "Importance_Mean": 0.004000000000000026,
+      "Importance_Std": 0.001224744871391563
+    },
+    {
+      "Feature": "ctDNA_level",
+      "Importance_Mean": 0.003000000000000047,
+      "Importance_Std": 0.005099019513592796
+    },
+    {
+      "Feature": "tumor_marker_level",
+      "Importance_Mean": 0.0030000000000000248,
+      "Importance_Std": 0.0018708286933869665
+    },
+    {
+      "Feature": "WBC",
+      "Importance_Mean": 0.0030000000000000027,
+      "Importance_Std": 0.00244948974278318
+    },
+    {
+      "Feature": "spo2",
+      "Importance_Mean": 0.0025000000000000135,
+      "Importance_Std": 0.0022360679774997916
+    },
+    {
+      "Feature": "treatment_cycle",
+      "Importance_Mean": 0.0,
+      "Importance_Std": 0.0
+    },
+    {
+      "Feature": "sex",
+      "Importance_Mean": 0.0,
+      "Importance_Std": 0.0
+    },
+    {
+      "Feature": "age",
+      "Importance_Mean": 0.0,
+      "Importance_Std": 0.0
+    }
+  ]
+}

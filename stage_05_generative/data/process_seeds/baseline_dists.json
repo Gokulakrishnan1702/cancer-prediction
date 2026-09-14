@@ -1,0 +1,48 @@
+{
+    "labs": {
+        "means": {
+            "alt_u_l": 39.792728768525606,
+            "ast_u_l": 34.19821844312999,
+            "total_bilirubin_mg_dl": 0.985882714222036
+        },
+        "covariance": {
+            "alt_u_l": {
+                "alt_u_l": 194.07080580122778,
+                "ast_u_l": -13.081353337488565,
+                "total_bilirubin_mg_dl": -0.40895115476541116
+            },
+            "ast_u_l": {
+                "alt_u_l": -13.081353337488565,
+                "ast_u_l": 87.7982332639846,
+                "total_bilirubin_mg_dl": -0.3416384929709035
+            },
+            "total_bilirubin_mg_dl": {
+                "alt_u_l": -0.40895115476541116,
+                "ast_u_l": -0.3416384929709035,
+                "total_bilirubin_mg_dl": 0.13257092392776368
+            }
+        }
+    },
+    "ctdna": {
+        "mean": 7.887682216236626,
+        "variance": 19.935438948850877
+    },
+    "mutations": {
+        "frequencies": {
+            "EGFR": 0.18,
+            "KRAS": 0.24,
+            "TP53": 0.19,
+            "MET": 0.17,
+            "ALK": 0.2
+        }
+    },
+    "toxicity": {
+        "grade_probabilities": {
+            "0": 0.48,
+            "1": 0.26,
+            "2": 0.13,
+            "3": 0.09,
+            "4": 0.04
+        }
+    }
+}

@@ -1,0 +1,1374 @@
+{
+    "metrics": {
+        "total_scenarios": 20,
+        "pass_rate": 95.0,
+        "fail_rate": 5.0,
+        "average_processing_latency_ms": 0.26
+    },
+    "scenarios": [
+        {
+            "scenario_id": "STRESS-01",
+            "expected_stress": "Rare mutation",
+            "patient_profile": {
+                "patient_id": "SYN-B2ED02AD",
+                "age": 65,
+                "sex": "Male",
+                "cancer_type": "NSCLC",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "ROS1",
+                    "NTRK1"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 6.43,
+                    "tumor_marker": 367.34
+                },
+                "tumor_burden": 93.81,
+                "organ_function_indicators": {
+                    "AST": 22.7,
+                    "ALT": 22.7,
+                    "Creatinine": 1.47
+                },
+                "previous_treatments": [],
+                "current_treatment": "Radiation",
+                "treatment_response": "Complete Response",
+                "adverse_events": [
+                    "Pneumonitis"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 2,
+                "driver_mutations": [],
+                "edge_case_type": "Rare mutation"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.1265,
+                    "risk_category": "Low"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable/Improving Expected",
+                    "confidence": 0.75
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 404 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-02",
+            "expected_stress": "Multiple mutations",
+            "patient_profile": {
+                "patient_id": "SYN-11533ACC",
+                "age": 47,
+                "sex": "Male",
+                "cancer_type": "Prostate Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "EGFR",
+                    "TP53",
+                    "PIK3CA",
+                    "KRAS"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 10.12,
+                    "tumor_marker": 149.61
+                },
+                "tumor_burden": 61.29,
+                "organ_function_indicators": {
+                    "AST": 39.7,
+                    "ALT": 22.7,
+                    "Creatinine": 1.02
+                },
+                "previous_treatments": [],
+                "current_treatment": "Targeted Therapy",
+                "treatment_response": "Stable Disease",
+                "adverse_events": [
+                    "Nausea"
+                ],
+                "resistance_status": "Confirmed",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 4,
+                "driver_mutations": [
+                    "EGFR",
+                    "KRAS"
+                ],
+                "edge_case_type": "Multiple mutations"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.4028,
+                    "risk_category": "Moderate"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.74
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 444 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-03",
+            "expected_stress": "Drug resistance",
+            "patient_profile": {
+                "patient_id": "SYN-A8521E7A",
+                "age": 69,
+                "sex": "Female",
+                "cancer_type": "NSCLC",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "ALK",
+                    "PIK3CA"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 2.18,
+                    "tumor_marker": 159.3
+                },
+                "tumor_burden": 82.81,
+                "organ_function_indicators": {
+                    "AST": 11.7,
+                    "ALT": 27.0,
+                    "Creatinine": 1.22
+                },
+                "previous_treatments": [
+                    "Immunotherapy"
+                ],
+                "current_treatment": "Chemotherapy",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "Pneumonitis",
+                    "Fatigue"
+                ],
+                "resistance_status": "Confirmed",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 2,
+                "driver_mutations": [
+                    "ALK"
+                ],
+                "edge_case_type": "Drug resistance"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.9405,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable/Improving Expected",
+                    "confidence": 0.85
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 464 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-04",
+            "expected_stress": "Rapid progression",
+            "patient_profile": {
+                "patient_id": "SYN-9D2AF663",
+                "age": 63,
+                "sex": "Female",
+                "cancer_type": "Prostate Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "ALK",
+                    "EGFR",
+                    "TP53"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 5.03,
+                    "tumor_marker": 41.9
+                },
+                "tumor_burden": 148.16,
+                "organ_function_indicators": {
+                    "AST": 18.2,
+                    "ALT": 31.1,
+                    "Creatinine": 1.31
+                },
+                "previous_treatments": [
+                    "Osimertinib"
+                ],
+                "current_treatment": "Surgery",
+                "treatment_response": "Partial Response",
+                "adverse_events": [
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 3,
+                "driver_mutations": [
+                    "ALK",
+                    "EGFR"
+                ],
+                "edge_case_type": "Rapid progression"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.6658,
+                    "risk_category": "Moderate"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.79
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Osimertinib"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 480 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-05",
+            "expected_stress": "Severe organ impairment",
+            "patient_profile": {
+                "patient_id": "SYN-ABEDE325",
+                "age": 69,
+                "sex": "Female",
+                "cancer_type": "Colorectal Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "BRAF",
+                    "MET",
+                    "ALK"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 28.68,
+                    "tumor_marker": 444.17
+                },
+                "tumor_burden": 76.11,
+                "organ_function_indicators": {
+                    "AST": 250,
+                    "ALT": 300,
+                    "Creatinine": 4.5
+                },
+                "previous_treatments": [
+                    "Radiation",
+                    "Pembrolizumab"
+                ],
+                "current_treatment": "Immunotherapy",
+                "treatment_response": "Partial Response",
+                "adverse_events": [
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 3,
+                "driver_mutations": [
+                    "BRAF",
+                    "ALK"
+                ],
+                "edge_case_type": "Severe organ impairment"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.9807,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.86
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 436 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-06",
+            "expected_stress": "Conflicting biomarkers",
+            "patient_profile": {
+                "patient_id": "SYN-20335291",
+                "age": 77,
+                "sex": "Male",
+                "cancer_type": "Pancreatic Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "TP53"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 5.0,
+                    "tumor_marker": 1500.0
+                },
+                "tumor_burden": 20.78,
+                "organ_function_indicators": {
+                    "AST": 16.9,
+                    "ALT": 20.0,
+                    "Creatinine": 1.27
+                },
+                "previous_treatments": [],
+                "current_treatment": "Surgery",
+                "treatment_response": "Stable Disease",
+                "adverse_events": [
+                    "Rash",
+                    "Fatigue"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 1,
+                "driver_mutations": [],
+                "edge_case_type": "Conflicting biomarkers"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.88,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.78
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": [
+                            "Fatigue",
+                            "Rash"
+                        ]
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 424 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-07",
+            "expected_stress": "High-risk toxicity",
+            "patient_profile": {
+                "patient_id": "SYN-4D916694",
+                "age": 60,
+                "sex": "Female",
+                "cancer_type": "Melanoma",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "BRAF"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 5.84,
+                    "tumor_marker": 211.62
+                },
+                "tumor_burden": 41.1,
+                "organ_function_indicators": {
+                    "AST": 21.6,
+                    "ALT": 17.0,
+                    "Creatinine": 0.95
+                },
+                "previous_treatments": [],
+                "current_treatment": "Pembrolizumab",
+                "treatment_response": "Stable Disease",
+                "adverse_events": [
+                    "Grade 4 Pneumonitis",
+                    "Severe Hepatotoxicity"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 1,
+                "driver_mutations": [
+                    "BRAF"
+                ],
+                "edge_case_type": "High-risk toxicity"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.7401,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable Disease Expected",
+                    "confidence": 0.82
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 383 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-08",
+            "expected_stress": "Missing clinical information",
+            "patient_profile": {
+                "patient_id": "SYN-157FEE95",
+                "age": 86,
+                "sex": "Male",
+                "cancer_type": "Ovarian Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [],
+                "biomarker_values": {
+                    "ctDNA": 2.74,
+                    "tumor_marker": 25.18
+                },
+                "tumor_burden": 92.73,
+                "organ_function_indicators": {
+                    "AST": 19.3,
+                    "ALT": 10.0,
+                    "Creatinine": 1.02
+                },
+                "previous_treatments": [],
+                "current_treatment": "Surgery",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 0,
+                "driver_mutations": [],
+                "edge_case_type": "Missing clinical information"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.8534,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.94
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 423 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-09",
+            "expected_stress": "Rare mutation",
+            "patient_profile": {
+                "patient_id": "SYN-31ECAC84",
+                "age": 62,
+                "sex": "Male",
+                "cancer_type": "Pancreatic Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "ROS1",
+                    "NTRK1"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 9.58,
+                    "tumor_marker": 172.82
+                },
+                "tumor_burden": 58.89,
+                "organ_function_indicators": {
+                    "AST": 32.8,
+                    "ALT": 30.2,
+                    "Creatinine": 1.09
+                },
+                "previous_treatments": [],
+                "current_treatment": "Chemotherapy",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 2,
+                "driver_mutations": [],
+                "edge_case_type": "Rare mutation"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.7764,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable Disease Expected",
+                    "confidence": 0.83
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 373 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-10",
+            "expected_stress": "Multiple mutations",
+            "patient_profile": {
+                "patient_id": "SYN-BCD4CB7C",
+                "age": 69,
+                "sex": "Male",
+                "cancer_type": "Prostate Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "EGFR",
+                    "TP53",
+                    "PIK3CA",
+                    "KRAS"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 23.54,
+                    "tumor_marker": 326.57
+                },
+                "tumor_burden": 128.89,
+                "organ_function_indicators": {
+                    "AST": 16.8,
+                    "ALT": 33.2,
+                    "Creatinine": 1.57
+                },
+                "previous_treatments": [
+                    "Pembrolizumab",
+                    "Surgery"
+                ],
+                "current_treatment": "Chemotherapy",
+                "treatment_response": "Partial Response",
+                "adverse_events": [
+                    "Pneumonitis"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 4,
+                "driver_mutations": [
+                    "EGFR",
+                    "KRAS"
+                ],
+                "edge_case_type": "Multiple mutations"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.1173,
+                    "risk_category": "Low"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.93
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 500 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-11",
+            "expected_stress": "Drug resistance",
+            "patient_profile": {
+                "patient_id": "SYN-79C18182",
+                "age": 90,
+                "sex": "Female",
+                "cancer_type": "Breast Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "RET"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 13.81,
+                    "tumor_marker": 143.98
+                },
+                "tumor_burden": 13.4,
+                "organ_function_indicators": {
+                    "AST": 16.4,
+                    "ALT": 14.3,
+                    "Creatinine": 1.14
+                },
+                "previous_treatments": [],
+                "current_treatment": "Osimertinib",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "Pneumonitis"
+                ],
+                "resistance_status": "Confirmed",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 1,
+                "driver_mutations": [],
+                "edge_case_type": "Drug resistance"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.9746,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable Disease Expected",
+                    "confidence": 0.74
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Osimertinib"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 359 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-12",
+            "expected_stress": "Rapid progression",
+            "patient_profile": {
+                "patient_id": "SYN-439D6419",
+                "age": 72,
+                "sex": "Female",
+                "cancer_type": "Breast Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "BRAF",
+                    "BRCA1",
+                    "PIK3CA"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 21.2,
+                    "tumor_marker": 182.95
+                },
+                "tumor_burden": 51.1,
+                "organ_function_indicators": {
+                    "AST": 30.2,
+                    "ALT": 30.1,
+                    "Creatinine": 1.15
+                },
+                "previous_treatments": [
+                    "Immunotherapy"
+                ],
+                "current_treatment": "Targeted Therapy",
+                "treatment_response": "Complete Response",
+                "adverse_events": [
+                    "Nausea"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 3,
+                "driver_mutations": [
+                    "BRAF"
+                ],
+                "edge_case_type": "Rapid progression"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.1187,
+                    "risk_category": "Low"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.84
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 422 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": false,
+            "fail_reason": "Failed to flag high-risk scenario"
+        },
+        {
+            "scenario_id": "STRESS-13",
+            "expected_stress": "Severe organ impairment",
+            "patient_profile": {
+                "patient_id": "SYN-2E7E6781",
+                "age": 87,
+                "sex": "Male",
+                "cancer_type": "NSCLC",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "MET",
+                    "EGFR",
+                    "TP53"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 1.14,
+                    "tumor_marker": 146.84
+                },
+                "tumor_burden": 92.72,
+                "organ_function_indicators": {
+                    "AST": 250,
+                    "ALT": 300,
+                    "Creatinine": 4.5
+                },
+                "previous_treatments": [],
+                "current_treatment": "Osimertinib",
+                "treatment_response": "Stable Disease",
+                "adverse_events": [
+                    "Pneumonitis"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 3,
+                "driver_mutations": [
+                    "EGFR"
+                ],
+                "edge_case_type": "Severe organ impairment"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.6954,
+                    "risk_category": "Moderate"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.75
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Osimertinib"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 361 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-14",
+            "expected_stress": "Conflicting biomarkers",
+            "patient_profile": {
+                "patient_id": "SYN-7816670D",
+                "age": 52,
+                "sex": "Male",
+                "cancer_type": "Pancreatic Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "BRCA2"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 5.0,
+                    "tumor_marker": 1500.0
+                },
+                "tumor_burden": 20.98,
+                "organ_function_indicators": {
+                    "AST": 30.0,
+                    "ALT": 33.7,
+                    "Creatinine": 0.64
+                },
+                "previous_treatments": [
+                    "Pembrolizumab"
+                ],
+                "current_treatment": "Osimertinib",
+                "treatment_response": "Complete Response",
+                "adverse_events": [
+                    "Rash",
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "Suspected",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 1,
+                "driver_mutations": [],
+                "edge_case_type": "Conflicting biomarkers"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.8688,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.71
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Osimertinib"
+                        ],
+                        "adverse_events": [
+                            "Fatigue",
+                            "Rash"
+                        ]
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 483 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-15",
+            "expected_stress": "High-risk toxicity",
+            "patient_profile": {
+                "patient_id": "SYN-71AB0DA6",
+                "age": 75,
+                "sex": "Male",
+                "cancer_type": "NSCLC",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "PIK3CA",
+                    "ALK",
+                    "TP53"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 3.64,
+                    "tumor_marker": 12.12
+                },
+                "tumor_burden": 26.25,
+                "organ_function_indicators": {
+                    "AST": 29.4,
+                    "ALT": 32.7,
+                    "Creatinine": 0.72
+                },
+                "previous_treatments": [],
+                "current_treatment": "Pembrolizumab",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "Grade 4 Pneumonitis",
+                    "Severe Hepatotoxicity"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 3,
+                "driver_mutations": [
+                    "ALK"
+                ],
+                "edge_case_type": "High-risk toxicity"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.9536,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.72
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 401 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-16",
+            "expected_stress": "Missing clinical information",
+            "patient_profile": {
+                "patient_id": "SYN-7AAFF713",
+                "age": 73,
+                "sex": "Male",
+                "cancer_type": "NSCLC",
+                "cancer_stage": "IV",
+                "genomic_mutations": [],
+                "biomarker_values": {
+                    "ctDNA": 7.47,
+                    "tumor_marker": 331.05
+                },
+                "tumor_burden": 32.81,
+                "organ_function_indicators": {
+                    "AST": 27.0,
+                    "ALT": 19.0,
+                    "Creatinine": 1.02
+                },
+                "previous_treatments": [],
+                "current_treatment": "Targeted Therapy",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "Nausea",
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 0,
+                "driver_mutations": [],
+                "edge_case_type": "Missing clinical information"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.9857,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable Disease Expected",
+                    "confidence": 0.77
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 362 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-17",
+            "expected_stress": "Rare mutation",
+            "patient_profile": {
+                "patient_id": "SYN-8356482C",
+                "age": 67,
+                "sex": "Female",
+                "cancer_type": "Colorectal Cancer",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "ROS1",
+                    "NTRK1"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 3.23,
+                    "tumor_marker": 376.55
+                },
+                "tumor_burden": 122.96,
+                "organ_function_indicators": {
+                    "AST": 19.4,
+                    "ALT": 24.8,
+                    "Creatinine": 1.04
+                },
+                "previous_treatments": [],
+                "current_treatment": "Pembrolizumab",
+                "treatment_response": "Stable Disease",
+                "adverse_events": [
+                    "Fatigue"
+                ],
+                "resistance_status": "Confirmed",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 2,
+                "driver_mutations": [],
+                "edge_case_type": "Rare mutation"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.5826,
+                    "risk_category": "Moderate"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable Disease Expected",
+                    "confidence": 0.89
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 364 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-18",
+            "expected_stress": "Multiple mutations",
+            "patient_profile": {
+                "patient_id": "SYN-619F090E",
+                "age": 56,
+                "sex": "Male",
+                "cancer_type": "NSCLC",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "EGFR",
+                    "TP53",
+                    "PIK3CA",
+                    "KRAS"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 10.22,
+                    "tumor_marker": 475.55
+                },
+                "tumor_burden": 90.28,
+                "organ_function_indicators": {
+                    "AST": 23.7,
+                    "ALT": 16.8,
+                    "Creatinine": 1.63
+                },
+                "previous_treatments": [
+                    "Osimertinib",
+                    "Pembrolizumab"
+                ],
+                "current_treatment": "Osimertinib",
+                "treatment_response": "Complete Response",
+                "adverse_events": [
+                    "Hepatotoxicity"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 4,
+                "driver_mutations": [
+                    "EGFR",
+                    "KRAS"
+                ],
+                "edge_case_type": "Multiple mutations"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.3191,
+                    "risk_category": "Low"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.85
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Osimertinib"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "URGENT"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 497 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-19",
+            "expected_stress": "Drug resistance",
+            "patient_profile": {
+                "patient_id": "SYN-39C8B140",
+                "age": 58,
+                "sex": "Male",
+                "cancer_type": "Melanoma",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "TP53",
+                    "MET"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 3.24,
+                    "tumor_marker": 75.78
+                },
+                "tumor_burden": 116.61,
+                "organ_function_indicators": {
+                    "AST": 21.8,
+                    "ALT": 16.8,
+                    "Creatinine": 1.07
+                },
+                "previous_treatments": [
+                    "Chemotherapy",
+                    "Pembrolizumab"
+                ],
+                "current_treatment": "Chemotherapy",
+                "treatment_response": "Progressive Disease",
+                "adverse_events": [
+                    "None"
+                ],
+                "resistance_status": "Confirmed",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 2,
+                "driver_mutations": [],
+                "edge_case_type": "Drug resistance"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.9694,
+                    "risk_category": "High"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Continued Progression Expected",
+                    "confidence": 0.93
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR",
+                            "ALK",
+                            "KRAS",
+                            "TP53"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": []
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 376 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        },
+        {
+            "scenario_id": "STRESS-20",
+            "expected_stress": "Rapid progression",
+            "patient_profile": {
+                "patient_id": "SYN-5EBED85B",
+                "age": 58,
+                "sex": "Male",
+                "cancer_type": "Melanoma",
+                "cancer_stage": "IV",
+                "genomic_mutations": [
+                    "ROS1"
+                ],
+                "biomarker_values": {
+                    "ctDNA": 7.25,
+                    "tumor_marker": 10.62
+                },
+                "tumor_burden": 75.61,
+                "organ_function_indicators": {
+                    "AST": 15.0,
+                    "ALT": 28.2,
+                    "Creatinine": 0.75
+                },
+                "previous_treatments": [],
+                "current_treatment": "Immunotherapy",
+                "treatment_response": "Stable Disease",
+                "adverse_events": [
+                    "Rash"
+                ],
+                "resistance_status": "None",
+                "synthetic_case": true,
+                "warning": "Synthetic scenario generated for AI evaluation only.",
+                "mutation_count": 1,
+                "driver_mutations": [],
+                "edge_case_type": "Rapid progression"
+            },
+            "pipeline_results": {
+                "stage1_ml": {
+                    "risk_score": 0.4289,
+                    "risk_category": "Moderate"
+                },
+                "stage2_dl": {
+                    "temporal_prediction": "Stable Disease Expected",
+                    "confidence": 0.74
+                },
+                "stage3_nlp": {
+                    "extracted_entities": {
+                        "mutations": [
+                            "EGFR"
+                        ],
+                        "drugs": [
+                            "Chemotherapy"
+                        ],
+                        "adverse_events": [
+                            "Fatigue",
+                            "Rash"
+                        ]
+                    },
+                    "urgency": "ROUTINE"
+                },
+                "stage4_slm": {
+                    "clinical_summary": "SLM Summary: Patient has a synthetic scenario. Note length: 343 chars. Key focus on treatment response and progression."
+                }
+            },
+            "pass": true,
+            "fail_reason": ""
+        }
+    ]
+}

@@ -1,0 +1,3 @@
+Model,Baseline_F1,OOD_F1,Decay
+Stage 01 (Toxicity),0.92,0.2,0.72
+Stage 02 (Progression),0.88,1.0,-0.12
