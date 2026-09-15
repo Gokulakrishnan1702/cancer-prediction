@@ -1733,10 +1733,6 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
                             <h4 id="s1-out-class">HIGH RISK</h4>
                         </div>
                         <div class="breakdown-box">
-                            <span>PREDICTION PROBABILITY</span>
-                            <h4 id="s1-out-prob">38.4%</h4>
-                        </div>
-                        <div class="breakdown-box">
                             <span>CONFIDENCE SCORE</span>
                             <h4 id="s1-out-conf">85.0%</h4>
                         </div>
@@ -3213,8 +3209,6 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
                 document.getElementById('s1-out-pred').innerText = `${data.prediction || 'Unknown'} Toxicity`;
                 const riskCat = data.risk_category || `${(data.prediction || 'MODERATE').toUpperCase()} RISK`;
                 document.getElementById('s1-out-class').innerText = riskCat;
-                const probText = (data.prediction_probability_pct !== undefined) ? `${data.prediction_probability_pct}%` : `${data.confidence_pct || 85}%`;
-                document.getElementById('s1-out-prob').innerText = probText;
                 document.getElementById('s1-out-conf').innerText = `${data.confidence_pct || 85}%`;
                 document.getElementById('s1-out-model-status').innerText = data.model_status || 'Operational';
                 document.getElementById('s1-out-patient-sub').innerText = `Patient: ${data.patient_id || payload.patient_id} | Model: ${data.model_architecture || 'Calibrated VotingClassifier Ensemble'}`;
@@ -3249,7 +3243,6 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
                 document.getElementById('s1-out-pid').innerText = payload.patient_id || 'PAT-ML-0101';
                 document.getElementById('s1-out-pred').innerText = 'Model/API unavailable';
                 document.getElementById('s1-out-class').innerText = 'ERROR';
-                document.getElementById('s1-out-prob').innerText = 'N/A';
                 document.getElementById('s1-out-conf').innerText = 'N/A';
                 document.getElementById('s1-out-model-status').innerText = 'Model/API unavailable';
                 document.getElementById('s1-out-interp').innerText = 'Model/API unavailable: ' + err.message;

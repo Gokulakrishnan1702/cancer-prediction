@@ -377,8 +377,6 @@ class UnifiedPipelineService:
             "risk_category": f"{prediction_label.upper()} RISK",
             "confidence": confidence,
             "confidence_pct": round(confidence * 100, 1),
-            "prediction_probability": confidence,
-            "prediction_probability_pct": round(confidence * 100, 1),
             "probabilities": probabilities,
             "important_features": top_features,
             "clinical_interpretation": (
