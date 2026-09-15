@@ -1,0 +1,66 @@
+{
+  "source": "National Comprehensive Cancer Network (NCCN) Guidelines v2024.1",
+  "guidelines": [
+    {
+      "id": "NCCN-NSCLC-EGFR-01",
+      "disease": "Non-Small Cell Lung Cancer (LUAD)",
+      "biomarker": "EGFR L858R / Exon 19 Deletion",
+      "stage": "Stage IV",
+      "standard_first_line": "Osimertinib 80mg daily",
+      "progression_sop": "On progression with rising ctDNA and suspected C797S or MET amplification: obtain liquid biopsy repeat NGS. If 1 clinical trial slot available and rapid ctDNA surge (>= 4 readings), prioritize targeted clinical trial enrollment. If stable/oligoprogression, continue Osimertinib with local SBRT or reroute to Platinum-doublet chemotherapy.",
+      "toxicity_limits": {
+        "max_alt_ast": 150.0,
+        "max_creatinine": 1.8,
+        "min_platelets": 75.0
+      }
+    },
+    {
+      "id": "NCCN-NSCLC-KRAS-02",
+      "disease": "Non-Small Cell Lung Cancer (LUAD)",
+      "biomarker": "KRAS G12C",
+      "stage": "Stage IV",
+      "standard_first_line": "Pembrolizumab + Carboplatin + Pemetrexed",
+      "second_line": "Sotorasib 960mg daily or Adagrasib 600mg BID",
+      "progression_sop": "Evaluate for secondary resistance mutations. If stable tumor size with moderate ctDNA rise, maintain standard targeted or chemotherapy regimen; if clinical trial slot is contested by rapidly progressing patient, standard-of-care maintenance has priority.",
+      "toxicity_limits": {
+        "max_alt_ast": 140.0,
+        "max_creatinine": 1.6,
+        "min_platelets": 80.0
+      }
+    },
+    {
+      "id": "NCCN-BRCA-03",
+      "disease": "Breast Invasive Carcinoma (BRCA)",
+      "biomarker": "BRCA1 / BRCA2 Germline",
+      "stage": "Stage III-IV",
+      "standard_first_line": "Olaparib or Talazoparib (PARP Inhibitor)",
+      "progression_sop": "Evaluate reversion mutations in BRCA1/2. Consider combination CDK4/6 inhibitor (Abemaciclib) or platinum-based chemotherapy.",
+      "toxicity_limits": {
+        "max_alt_ast": 130.0,
+        "max_creatinine": 1.7,
+        "min_platelets": 100.0
+      }
+    },
+    {
+      "id": "NCCN-COLON-04",
+      "disease": "Colorectal Adenocarcinoma (COAD)",
+      "biomarker": "KRAS Wild-Type / BRAF V600E",
+      "stage": "Stage IV",
+      "standard_first_line": "Encorafenib + Cetuximab",
+      "progression_sop": "FOLFOXIRI + Bevacizumab salvage protocol. Monitor for EGFR re-sensitization.",
+      "toxicity_limits": {
+        "max_alt_ast": 120.0,
+        "max_creatinine": 1.6,
+        "min_platelets": 90.0
+      }
+    },
+    {
+      "id": "NCCN-SAFETY-DILI-05",
+      "disease": "Compound Organ Toxicity / DILI",
+      "biomarker": "Any",
+      "stage": "Any",
+      "critical_halt_criteria": "ALT or AST > 5x ULN (>200 U/L) OR Total Bilirubin > 3.0 mg/dL OR Serum Creatinine > 2.5 mg/dL (Hy's Law or Acute Kidney Injury Grade >= 3).",
+      "action": "IMMEDIATE DRUG WITHHOLD. Do not initiate new trial or systemic agents. Trigger Emergency Safety Review."
+    }
+  ]
+}

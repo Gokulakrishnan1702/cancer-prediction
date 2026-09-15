@@ -1,0 +1,33 @@
+{
+  "initial_record_count": 2000,
+  "deduplicated_count": 2000,
+  "duplicates_removed": 0,
+  "missing_values_handled": {
+    "cancer_type": "Imputed 55 missing values",
+    "cancer_stage": "Imputed 53 missing values",
+    "genomic_biomarker": "Created with clinical reference default",
+    "mutation_profile": "Imputed 314 missing values",
+    "mutation_count": "Imputed 77 missing values",
+    "tumor_marker_level": "Imputed 66 missing values",
+    "ctDNA_level": "Imputed 66 missing values",
+    "treatment_name": "Imputed 51 missing values",
+    "treatment_cycle": "Imputed 58 missing values",
+    "dosage_mg": "Imputed 72 missing values",
+    "previous_dose_mg": "Imputed 65 missing values",
+    "treatment_duration_days": "Imputed 66 missing values",
+    "WBC": "Imputed 57 missing values",
+    "hemoglobin": "Imputed 59 missing values",
+    "platelet_count": "Imputed 53 missing values",
+    "creatinine": "Imputed 63 missing values",
+    "bilirubin": "Imputed 57 missing values",
+    "ALT": "Imputed 63 missing values",
+    "AST": "Imputed 55 missing values",
+    "heart_rate": "Imputed 61 missing values",
+    "systolic_bp": "Imputed 63 missing values",
+    "diastolic_bp": "Imputed 65 missing values",
+    "spo2": "Imputed 58 missing values"
+  },
+  "invalid_records_filtered": 0,
+  "final_clean_count": 2000,
+  "schema_validation_passed": true
+}

@@ -1,0 +1,120 @@
+{
+  "total_benchmark_runs": 15,
+  "metrics_table": [
+    {
+      "metric": "Task Completion Rate",
+      "result": "100.0%",
+      "target": ">= 95.0%",
+      "status": "PASSED",
+      "interpretation": "High rate of autonomous multi-agent workflow conclusion across normal and edge cases."
+    },
+    {
+      "metric": "Agent Success Rate",
+      "result": "100.0%",
+      "target": ">= 95.0%",
+      "status": "PASSED",
+      "interpretation": "Proportion of individual agent tasks executed without unhandled errors."
+    },
+    {
+      "metric": "Tool Selection Accuracy",
+      "result": "100.0%",
+      "target": "100.0%",
+      "status": "PASSED",
+      "interpretation": "Accurate deterministic dispatching to appropriate Stage 1-5 APIs and registries."
+    },
+    {
+      "metric": "Tool Execution Success Rate",
+      "result": "100.0%",
+      "target": ">= 98.0%",
+      "status": "PASSED",
+      "interpretation": "Successful invocations of ML, DL, NLP, SLM, GenAI, and Knowledge connectors."
+    },
+    {
+      "metric": "Treatment Recommendation Consistency",
+      "result": "100.0%",
+      "target": ">= 95.0%",
+      "status": "PASSED",
+      "interpretation": "Full concordance with NCCN oncology guidelines and molecular indications."
+    },
+    {
+      "metric": "Safety Violation Rate",
+      "result": "0.0%",
+      "target": "0.0%",
+      "status": "PASSED",
+      "interpretation": "Zero clinical safety violations escaped past the Safety Interceptor."
+    },
+    {
+      "metric": "Hallucination Rate",
+      "result": "0.0%",
+      "target": "0.0%",
+      "status": "PASSED",
+      "interpretation": "Zero fabrication of fictitious trials, drugs, images, or clinical facts."
+    },
+    {
+      "metric": "Clinical Trial Matching Accuracy",
+      "result": "100.0%",
+      "target": ">= 95.0%",
+      "status": "PASSED",
+      "interpretation": "Exact molecular and organ eligibility filtering against verified registry."
+    },
+    {
+      "metric": "Decision Trace Completeness",
+      "result": "100.0%",
+      "target": "100.0%",
+      "status": "PASSED",
+      "interpretation": "Full auditable record generated for every agent execution step without raw CoT."
+    },
+    {
+      "metric": "Workflow Failure Rate",
+      "result": "0.0%",
+      "target": "<= 5.0%",
+      "status": "PASSED",
+      "interpretation": "Minimal unhandled catastrophic workflow drops."
+    },
+    {
+      "metric": "Physician Override Rate",
+      "result": "6.7%",
+      "target": "Tracked",
+      "status": "AUDITED",
+      "interpretation": "Physician override capability verified and recorded in SQLite audit ledger."
+    },
+    {
+      "metric": "End-to-End Latency",
+      "result": "967.7 ms",
+      "target": "< 2000 ms",
+      "status": "PASSED",
+      "interpretation": "Near real-time execution supporting live multidisciplinary tumor board use."
+    }
+  ],
+  "raw_metrics": {
+    "task_completion_rate_pct": 100.0,
+    "agent_success_rate_pct": 100.0,
+    "workflow_failure_rate_pct": 0.0,
+    "tool_selection_accuracy_pct": 100.0,
+    "tool_execution_success_rate_pct": 100.0,
+    "treatment_recommendation_consistency_pct": 100.0,
+    "safety_violation_rate_pct": 0.0,
+    "hallucination_rate_pct": 0.0,
+    "clinical_trial_matching_accuracy_pct": 100.0,
+    "decision_trace_completeness_pct": 100.0,
+    "human_override_rate_pct": 6.67,
+    "average_workflow_latency_ms": 967.7
+  },
+  "scenarios_evaluated": [
+    "1. Normal patient",
+    "2. Missing data",
+    "3. Conflicting data",
+    "4. High-risk patient",
+    "5. Critical patient",
+    "6. Invalid input",
+    "7. Boundary values",
+    "8. Biomarker mismatch",
+    "9. Toxicity case (DILI)",
+    "10. Renal concern (AKI)",
+    "11. Unsafe treatment combination",
+    "12. API failure",
+    "13. Model unavailable",
+    "14. Trial data unavailable",
+    "15. Agent failure / Physician override"
+  ]
+}

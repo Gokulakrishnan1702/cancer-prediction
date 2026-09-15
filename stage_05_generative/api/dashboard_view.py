@@ -923,7 +923,252 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
             .sidebar { width: 72px; }
             .brand-text, .nav-link span, .menu-heading, .stage-pill-tag, .sidebar-footer { display: none; }
             .sidebar-brand { justify-content: center; padding: 1rem 0; }
-            .nav-link { justify-content: center; padding: 0.75rem 0; }
+        /* ==========================================================================
+           STAGE 06 — AGENTIC AI COMMAND CENTER STYLES
+           ========================================================================== */
+        .agentic-status-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.85rem;
+        }
+        @media (max-width: 1200px) {
+            .agentic-status-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .agent-node-card {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        .agent-node-card:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.12);
+        }
+        .agent-node-info h4 {
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
+        }
+        .agent-node-info p {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        .agent-status-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .agent-status-indicator.waiting {
+            background: #f1f5f9;
+            color: #94a3b8;
+            border: 1.5px solid #cbd5e1;
+        }
+        .agent-status-indicator.processing {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 1.5px solid #38bdf8;
+            animation: spinFast 1.2s linear infinite;
+        }
+        .agent-status-indicator.completed {
+            background: #ecfdf5;
+            color: #059669;
+            border: 1.5px solid #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.3);
+        }
+        .agent-status-indicator.warning {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1.5px solid #f59e0b;
+        }
+        .agent-status-indicator.failed {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1.5px solid #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+        }
+        @keyframes spinFast {
+            100% { transform: rotate(360deg); }
+        }
+
+        .physician-control-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f172a;
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1.25rem;
+            color: #ffffff;
+            margin-top: 1rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+        }
+        .physician-control-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+        .physician-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-physician {
+            padding: 0.45rem 0.95rem;
+            font-size: 0.74rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+        }
+        .btn-physician.primary {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+        }
+        .btn-physician.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.5);
+        }
+        .btn-physician.pause {
+            background: #334155;
+            color: #e2e8f0;
+        }
+        .btn-physician.pause:hover { background: #475569; }
+        .btn-physician.stop {
+            background: #7f1d1d;
+            color: #fecaca;
+        }
+        .btn-physician.stop:hover { background: #991b1b; }
+        .btn-physician.override {
+            background: #b45309;
+            color: #fef3c7;
+        }
+        .btn-physician.override:hover { background: #d97706; }
+
+        .decision-trace-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+        .decision-trace-table th {
+            background: #f8fafc;
+            padding: 0.65rem 0.85rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border-card);
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+        }
+        .decision-trace-table td {
+            padding: 0.75rem 0.85rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+            color: var(--text-primary);
+        }
+        .decision-trace-table tr:hover {
+            background: #f8fafc;
+        }
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0284c7;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.68rem;
+        }
+        .trial-card-item {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #0284c7;
+            transition: all 0.2s ease;
+        }
+        .trial-card-item:hover {
+            border-color: #38bdf8;
+            box-shadow: var(--shadow-sm);
+        }
+        .trial-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .trial-card-header h4 {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .trial-meta-pills {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-top: 0.35rem;
+        }
+        .trial-meta-pill {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+        }
+        .trial-meta-pill.match {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .safety-alert-halt {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            animation: pulseCard 2s infinite alternate;
+        }
+        .safety-alert-halt h3 {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #b91c1c;
+            letter-spacing: 0.04em;
+        }
+        .safety-alert-halt p {
+            font-size: 0.82rem;
+            color: #7f1d1d;
+            margin-top: 0.35rem;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -978,6 +1223,11 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
                 <span>⑤ GenAI Report</span>
                 <div class="stage-pill-tag">GENAI</div>
             </a>
+            <a class="nav-link" data-view="view-stage6">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                <span>⑥ Agentic AI</span>
+                <div class="stage-pill-tag" style="background: rgba(14, 165, 233, 0.2); color: #0284c7;">AGENTIC</div>
+            </a>
 
             <div class="menu-heading">RECORDS & AUDIT</div>
             <a class="nav-link" data-view="view-history">
@@ -1024,6 +1274,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
                 <div class="stage-status-chip ready" id="chip-nlp">NLP ✓</div>
                 <div class="stage-status-chip ready" id="chip-slm">SLM ✓</div>
                 <div class="stage-status-chip ready" id="chip-genai">GenAI ✓</div>
+                <div class="stage-status-chip ready" id="chip-agentic" style="border-color: #0284c7; color: #0284c7;">Agentic ✓</div>
             </div>
         </header>
 
@@ -2061,6 +2312,349 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 
 
             <!-- ==============================================================
+                 VIEW 6B: STAGE 6 — AGENTIC AI COMMAND CENTER
+                 ============================================================== -->
+            <section id="view-stage6" class="view-section">
+                <div class="view-header">
+                    <h2>STAGE ⑥ — AGENTIC AI</h2>
+                    <p>Autonomous Multi-Agent Oncology Decision Engine · Deliberative Clinical Decision Support</p>
+                </div>
+
+                <!-- 1. PATIENT CONTEXT & CASE PRESETS -->
+                <div class="patient-input-card">
+                    <div class="card-title-strip">
+                        <h3>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            PATIENT CONTEXT & CLINICAL REASONING FEEDER
+                        </h3>
+                        <div class="preset-buttons">
+                            <span style="font-size: 0.68rem; color: #64748b; font-weight: 600;">CLINICAL PRESETS:</span>
+                            <button class="btn-preset" type="button" onclick="setAgenticPreset('case_a_egfr')" style="background: #e0f2fe; color: #0369a1; border-color: #38bdf8;">Patient A: EGFR+ (6 ctDNA Surge)</button>
+                            <button class="btn-preset" type="button" onclick="setAgenticPreset('case_b_kras')" style="background: #fef3c7; color: #92400e; border-color: #f59e0b;">Patient B: KRAS+ (Stable 2 ctDNA)</button>
+                            <button class="btn-preset danger" type="button" onclick="setAgenticPreset('case_c_dili')">DILI Safety Alert</button>
+                            <button class="btn-preset" type="button" onclick="setAgenticPreset('case_d_no_image')">No Image Edge Case</button>
+                            <button class="btn-preset" type="button" onclick="pullExistingAiResults()" style="background: #ecfdf5; color: #065f46; border-color: #10b981; font-weight: 800;">[ USE EXISTING AI RESULTS ]</button>
+                        </div>
+                    </div>
+
+                    <form id="form-stage6" onsubmit="event.preventDefault(); runAgenticAnalysis();">
+                        <div class="input-grid-4">
+                            <div class="form-group">
+                                <label class="form-label">Patient ID</label>
+                                <input type="text" id="s6-patient-id" class="form-control" value="PAT-EGFR-001">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Age & Sex</label>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="number" id="s6-age" class="form-control" value="62" style="width: 60%;">
+                                    <select id="s6-sex" class="form-control" style="width: 40%;">
+                                        <option value="M" selected>M</option>
+                                        <option value="F">F</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cancer Type & Stage</label>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <select id="s6-cancer-type" class="form-control" style="width: 65%;">
+                                        <option value="Lung (LUAD)" selected>Lung (LUAD)</option>
+                                        <option value="Breast (BRCA)">Breast (BRCA)</option>
+                                        <option value="Colon (COAD)">Colon (COAD)</option>
+                                    </select>
+                                    <select id="s6-stage" class="form-control" style="width: 35%;">
+                                        <option value="Stage IV" selected>Stage IV</option>
+                                        <option value="Stage III">Stage III</option>
+                                        <option value="Stage II">Stage II</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Genomic Biomarker</label>
+                                <input type="text" id="s6-biomarker" class="form-control" value="EGFR L858R">
+                            </div>
+                        </div>
+
+                        <div class="input-grid-4" style="margin-top: 0.75rem;">
+                            <div class="form-group">
+                                <label class="form-label">Current Regimen & Cycle</label>
+                                <input type="text" id="s6-treatment" class="form-control" value="Osimertinib (Targeted TKI)">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">ctDNA Level (ng/mL)</label>
+                                <input type="number" step="0.01" id="s6-ctdna" class="form-control" value="0.88">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Rising ctDNA Readings (Count)</label>
+                                <input type="number" id="s6-rising-ctdna" class="form-control" value="6">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Medical Image / Scan</label>
+                                <select id="s6-image-toggle" class="form-control">
+                                    <option value="true" selected>Provided (CT + Pathology)</option>
+                                    <option value="false">Unavailable / Pending Transfer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-grid-4" style="margin-top: 0.75rem;">
+                            <div class="form-group">
+                                <label class="form-label">Creatinine (mg/dL)</label>
+                                <input type="number" step="0.05" id="s6-cr" class="form-control" value="1.15">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">ALT (U/L)</label>
+                                <input type="number" id="s6-alt" class="form-control" value="48">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">AST (U/L)</label>
+                                <input type="number" id="s6-ast" class="form-control" value="44">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Total Bilirubin (mg/dL)</label>
+                                <input type="number" step="0.1" id="s6-bili" class="form-control" value="1.10">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 0.75rem;">
+                            <label class="form-label">Clinical Notes / History</label>
+                            <textarea id="s6-notes" class="form-control" rows="2">62yo male with metastatic EGFR+ NSCLC. Severe progression on serial imaging. 6 consecutive rising ctDNA timepoints indicating emergence of resistance bypass.</textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 2. AGENT STATUS DASHBOARD -->
+                <div class="table-card" style="padding: 1.25rem; margin-top: 1rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-card); padding-bottom: 0.75rem;">
+                        <div>
+                            <h3 style="font-size: 0.92rem; font-weight: 800; color: var(--text-primary);">MULTI-AGENT ORCHESTRATION STATUS DASHBOARD</h3>
+                            <p style="font-size: 0.72rem; color: var(--text-light); margin-top: 2px;">Real-time state tracking across 10 specialized autonomous clinical agents</p>
+                        </div>
+                        <div style="display: flex; gap: 0.6rem; font-size: 0.68rem; font-weight: 700;">
+                            <span style="color: #94a3b8;">○ Waiting</span>
+                            <span style="color: #0284c7;">⟳ Processing</span>
+                            <span style="color: #059669;">✓ Completed</span>
+                            <span style="color: #d97706;">⚠ Warning</span>
+                            <span style="color: #dc2626;">✕ Failed</span>
+                        </div>
+                    </div>
+
+                    <div class="agentic-status-grid">
+                        <div class="agent-node-card" id="agent-card-agent_patient_data">
+                            <div class="agent-node-info">
+                                <h4>PATIENT DATA AGENT</h4>
+                                <p id="agent-msg-agent_patient_data">Schema & normalization</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_patient_data">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_risk_analysis">
+                            <div class="agent-node-info">
+                                <h4>RISK ANALYSIS AGENT</h4>
+                                <p id="agent-msg-agent_risk_analysis">Stage 1 ML toxicity</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_risk_analysis">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_image_analysis">
+                            <div class="agent-node-info">
+                                <h4>CLINICAL ANALYSIS AGENT</h4>
+                                <p id="agent-msg-agent_image_analysis">Stage 2 DL imaging</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_image_analysis">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_clinical_nlp">
+                            <div class="agent-node-info">
+                                <h4>CLINICAL NLP AGENT</h4>
+                                <p id="agent-msg-agent_clinical_nlp">Stage 3 triage & NER</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_clinical_nlp">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_clinical_briefing">
+                            <div class="agent-node-info">
+                                <h4>SLM BRIEFING AGENT</h4>
+                                <p id="agent-msg-agent_clinical_briefing">Stage 4 concise summary</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_clinical_briefing">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_scenario_analysis">
+                            <div class="agent-node-info">
+                                <h4>GENAI SCENARIO AGENT</h4>
+                                <p id="agent-msg-agent_scenario_analysis">Stage 5 in-silico stress</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_scenario_analysis">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_treatment_optimization">
+                            <div class="agent-node-info">
+                                <h4>TREATMENT AGENT</h4>
+                                <p id="agent-msg-agent_treatment_optimization">Regimen synthesis</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_treatment_optimization">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_trial_matching">
+                            <div class="agent-node-info">
+                                <h4>TRIAL MATCHING AGENT</h4>
+                                <p id="agent-msg-agent_trial_matching">ReAct trial allocation</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_trial_matching">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_safety_guardrail">
+                            <div class="agent-node-info">
+                                <h4>SAFETY AGENT</h4>
+                                <p id="agent-msg-agent_safety_guardrail">Organ toxicity interlock</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_safety_guardrail">○</div>
+                        </div>
+                        <div class="agent-node-card" id="agent-card-agent_final_decision">
+                            <div class="agent-node-info">
+                                <h4>FINAL DECISION AGENT</h4>
+                                <p id="agent-msg-agent_final_decision">Multi-agent consensus</p>
+                            </div>
+                            <div class="agent-status-indicator waiting" id="agent-dot-agent_final_decision">○</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. PHYSICIAN CONTROL STRIP -->
+                <div class="physician-control-bar">
+                    <div class="physician-control-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>ONCOLOGY TUMOR BOARD COMMAND & CONTROL</span>
+                        <span id="s6-override-badge" class="metric-badge red" style="display: none; margin-left: 0.5rem;">PHYSICIAN OVERRIDE ACTIVE</span>
+                    </div>
+                    <div class="physician-btn-group">
+                        <button class="btn-physician primary" id="btn-run-agentic" onclick="runAgenticAnalysis()">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            [ RUN AGENTIC ANALYSIS ]
+                        </button>
+                        <button class="btn-physician pause" id="btn-pause-agentic" onclick="togglePauseAgentic()">[ PAUSE AGENT ]</button>
+                        <button class="btn-physician stop" id="btn-stop-agentic" onclick="stopAgentic()">[ STOP AGENT ]</button>
+                        <button class="btn-physician override" id="btn-override-agentic" onclick="promptPhysicianOverride()">[ PHYSICIAN OVERRIDE ]</button>
+                    </div>
+                </div>
+
+                <!-- 4. SAFETY HALT BANNER -->
+                <div id="s6-safety-halt-banner" class="safety-alert-halt" style="display: none;">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#ef4444" style="flex-shrink:0;"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <div>
+                        <h3>🚨 SAFETY REVIEW REQUIRED — WORKFLOW HALTED</h3>
+                        <p id="s6-safety-halt-text">A critical clinical contraindication has been intercepted by the Safety Guardrail Agent. Autonomous trial matching and therapy escalation are suspended until oncologist review.</p>
+                    </div>
+                </div>
+
+                <!-- 5. AGENTIC ANALYSIS RESULTS SECTION -->
+                <div id="s6-results-container" style="display: none; flex-direction: column; gap: 1.25rem;">
+                    
+                    <!-- FINAL MULTI-AGENT CLINICAL ASSESSMENT CARD -->
+                    <div class="final-assessment-card" style="display: flex; flex-direction: column; gap: 1rem; border: 2px solid #0284c7; background: #ffffff;">
+                        <div class="card-title-strip" style="border-bottom: 1px solid var(--border-card); padding-bottom: 0.75rem;">
+                            <div>
+                                <h3 style="font-size: 1.1rem; color: #0284c7;">FINAL MULTI-AGENT CLINICAL ASSESSMENT</h3>
+                                <p id="s6-final-patient-meta" style="font-size: 0.78rem; color: var(--text-light); margin-top: 2px;">Patient ID: PAT-EGFR-001 | Status: SUCCESS</p>
+                            </div>
+                            <span id="s6-final-status-pill" class="metric-badge green" style="font-size: 0.82rem; padding: 0.4rem 0.85rem;">CONSENSUS ACHIEVED</span>
+                        </div>
+
+                        <div class="clinical-summary-box" style="border-left-color: #0284c7; background: #f0f9ff;">
+                            <strong style="color: #0369a1; font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">MULTI-AGENT CONSENSUS DIRECTIVE:</strong>
+                            <span id="s6-final-directive" style="font-size: 0.88rem; font-weight: 700; color: #0f172a; line-height: 1.6;">Recommendation generated...</span>
+                        </div>
+
+                        <div class="assessment-breakdown-grid">
+                            <div class="breakdown-box">
+                                <span>STAGE 1 ML RISK</span>
+                                <h4 id="s6-sum-ml">Low Toxicity</h4>
+                            </div>
+                            <div class="breakdown-box">
+                                <span>STAGE 2 DL IMAGING</span>
+                                <h4 id="s6-sum-dl">Stable Lesion</h4>
+                            </div>
+                            <div class="breakdown-box">
+                                <span>STAGE 3 NLP TRIAGE</span>
+                                <h4 id="s6-sum-nlp">MODERATE</h4>
+                            </div>
+                            <div class="breakdown-box">
+                                <span>SAFETY GUARDRAIL</span>
+                                <h4 id="s6-sum-safety" style="color: #059669;">PASSED</h4>
+                            </div>
+                        </div>
+
+                        <div class="disclaimer-strip" style="color: #64748b; font-weight: 600;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            AI-generated clinical decision support. Final treatment decisions require qualified oncologist review.
+                        </div>
+                    </div>
+
+                    <!-- TWO-COLUMN SECTION: TREATMENT OPTIMIZATION & TRIAL MATCHING -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                        
+                        <!-- CARD A: TREATMENT OPTIMIZATION -->
+                        <div class="table-card" style="padding: 1.25rem;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 0.92rem; font-weight: 800; color: var(--text-primary);">TREATMENT OPTIMIZATION</h3>
+                                <span class="metric-badge blue" style="font-size: 0.65rem;">SYNTHESIZED PROTOCOLS</span>
+                            </div>
+                            <div id="s6-treatment-options-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <!-- Rendered dynamically -->
+                            </div>
+                            <div style="font-size: 0.7rem; color: #64748b; margin-top: 0.75rem; font-style: italic; border-top: 1px solid var(--border-card); padding-top: 0.5rem;">
+                                AI-generated clinical decision support — requires qualified oncologist review.
+                            </div>
+                        </div>
+
+                        <!-- CARD B: CLINICAL TRIAL MATCHING -->
+                        <div class="table-card" style="padding: 1.25rem;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 0.92rem; font-weight: 800; color: var(--text-primary);">CLINICAL TRIAL MATCHING & SLOTS</h3>
+                                <span class="metric-badge green" id="s6-trial-count-badge" style="font-size: 0.65rem;">VERIFIED REGISTRY</span>
+                            </div>
+                            <div id="s6-trial-matches-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TRANSPARENT DECISION TRACE TIMELINE -->
+                    <div class="table-card" style="padding: 1.25rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem;">
+                            <div>
+                                <h3 style="font-size: 0.92rem; font-weight: 800; color: var(--text-primary);">LIVE AGENT DECISION TRACE</h3>
+                                <p style="font-size: 0.72rem; color: var(--text-light); margin-top: 2px;">Step-by-step transparent ReAct reasoning trail (auditable without raw chain-of-thought)</p>
+                            </div>
+                            <span class="metric-badge blue" id="s6-trace-count-pill" style="font-size: 0.68rem;">10 STEPS VERIFIED</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="decision-trace-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;">Step</th>
+                                        <th style="width: 170px;">Agent</th>
+                                        <th style="width: 160px;">Tool / API Used</th>
+                                        <th style="width: 90px;">Status</th>
+                                        <th style="width: 80px;">Time</th>
+                                        <th>Reasoning Summary & Audit Findings</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="s6-decision-trace-tbody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- COMPREHENSIVE SAFETY CHECK AUDIT CARD -->
+                    <div class="table-card" style="padding: 1.25rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem;">
+                            <h3 style="font-size: 0.92rem; font-weight: 800; color: var(--text-primary);">ORGAN TOXICITY & SAFETY INTERLOCK AUDIT</h3>
+                            <span class="metric-badge green" id="s6-safety-overall-badge">ALL FLOORS PASSED</span>
+                        </div>
+                        <div id="s6-safety-checks-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ==============================================================
                  VIEW 7: HISTORY
                  ============================================================== -->
             <section id="view-history" class="view-section">
@@ -3062,6 +3656,339 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
                 btn.disabled = false;
                 btn.innerHTML = `[ GENERATE ]`;
             }
+        }
+
+        // ======================================================================
+        // STAGE 6 (AGENTIC AI) CLIENT HANDLERS
+        // ======================================================================
+        let activeAgenticTraceId = null;
+        let isAgenticPaused = false;
+
+        async function setAgenticPreset(key) {
+            try {
+                const res = await fetch('/api/v1/agentic/presets');
+                const presets = await res.json();
+                const p = presets[key];
+                if (!p || !p.data) return;
+                const d = p.data;
+
+                document.getElementById('s6-patient-id').value = d.patient_id || 'PAT-0001';
+                document.getElementById('s6-age').value = d.age || 60;
+                document.getElementById('s6-sex').value = d.sex || 'M';
+                document.getElementById('s6-cancer-type').value = d.cancer_type || 'Lung (LUAD)';
+                document.getElementById('s6-stage').value = d.cancer_stage || 'Stage IV';
+                document.getElementById('s6-biomarker').value = d.genomic_biomarker || 'EGFR L858R';
+                document.getElementById('s6-treatment').value = d.treatment_name || 'Osimertinib';
+                document.getElementById('s6-ctdna').value = d.ctDNA_level || 0.45;
+                document.getElementById('s6-rising-ctdna').value = d.rising_ctdna_readings || 2;
+                document.getElementById('s6-image-toggle').value = d.medical_image_provided ? 'true' : 'false';
+                document.getElementById('s6-cr').value = d.creatinine || 1.1;
+                document.getElementById('s6-alt').value = d.ALT || 45;
+                document.getElementById('s6-ast').value = d.AST || 42;
+                document.getElementById('s6-bili').value = d.bilirubin || 1.0;
+                document.getElementById('s6-notes').value = d.clinical_notes || '';
+
+                // Reset statuses
+                resetAgenticStatusDots();
+                document.getElementById('s6-safety-halt-banner').style.display = 'none';
+                document.getElementById('s6-override-badge').style.display = 'none';
+            } catch (e) {
+                console.error("Error setting agentic preset", e);
+            }
+        }
+
+        function pullExistingAiResults() {
+            const pid = document.getElementById('inp-patient_id');
+            if (pid && pid.value) document.getElementById('s6-patient-id').value = pid.value;
+            const age = document.getElementById('inp-age');
+            if (age && age.value) document.getElementById('s6-age').value = age.value;
+            const sex = document.getElementById('inp-sex');
+            if (sex && sex.value) document.getElementById('s6-sex').value = sex.value;
+            const ct = document.getElementById('inp-cancer_type');
+            if (ct && ct.value) document.getElementById('s6-cancer-type').value = ct.value;
+            const st = document.getElementById('inp-cancer_stage');
+            if (st && st.value) document.getElementById('s6-stage').value = st.value;
+            const bio = document.getElementById('inp-mutation_profile');
+            if (bio && bio.value) document.getElementById('s6-biomarker').value = bio.value;
+            const tx = document.getElementById('inp-treatment_name');
+            if (tx && tx.value) document.getElementById('s6-treatment').value = tx.value;
+            const ctdna = document.getElementById('inp-ctDNA_level');
+            if (ctdna && ctdna.value) document.getElementById('s6-ctdna').value = ctdna.value;
+            const cr = document.getElementById('inp-creatinine');
+            if (cr && cr.value) document.getElementById('s6-cr').value = cr.value;
+            const alt = document.getElementById('inp-ALT');
+            if (alt && alt.value) document.getElementById('s6-alt').value = alt.value;
+            const ast = document.getElementById('inp-AST');
+            if (ast && ast.value) document.getElementById('s6-ast').value = ast.value;
+            const bili = document.getElementById('inp-bilirubin');
+            if (bili && bili.value) document.getElementById('s6-bili').value = bili.value;
+
+            alert("Existing AI parameters successfully pulled into Stage 6 Context Feeder!");
+        }
+
+        function resetAgenticStatusDots() {
+            const agentIds = [
+                'agent_patient_data', 'agent_risk_analysis', 'agent_image_analysis',
+                'agent_clinical_nlp', 'agent_clinical_briefing', 'agent_scenario_analysis',
+                'agent_treatment_optimization', 'agent_trial_matching', 'agent_safety_guardrail',
+                'agent_final_decision'
+            ];
+            agentIds.forEach(id => {
+                const dot = document.getElementById(`agent-dot-${id}`);
+                if (dot) {
+                    dot.className = 'agent-status-indicator waiting';
+                    dot.innerText = '○';
+                }
+            });
+        }
+
+        async function runAgenticAnalysis() {
+            const btn = document.getElementById('btn-run-agentic');
+            btn.disabled = true;
+            btn.innerHTML = `<span class="system-dot" style="background:#fff;"></span> ORCHESTRATING 10 AGENTS...`;
+
+            // Set all dots to processing
+            const agentIds = [
+                'agent_patient_data', 'agent_risk_analysis', 'agent_image_analysis',
+                'agent_clinical_nlp', 'agent_clinical_briefing', 'agent_scenario_analysis',
+                'agent_treatment_optimization', 'agent_trial_matching', 'agent_safety_guardrail',
+                'agent_final_decision'
+            ];
+            agentIds.forEach(id => {
+                const dot = document.getElementById(`agent-dot-${id}`);
+                if (dot) {
+                    dot.className = 'agent-status-indicator processing';
+                    dot.innerText = '⟳';
+                }
+            });
+
+            document.getElementById('s6-safety-halt-banner').style.display = 'none';
+
+            const payload = {
+                patient: {
+                    patient_id: document.getElementById('s6-patient-id').value,
+                    age: parseFloat(document.getElementById('s6-age').value) || 60,
+                    sex: document.getElementById('s6-sex').value,
+                    cancer_type: document.getElementById('s6-cancer-type').value,
+                    cancer_stage: document.getElementById('s6-stage').value,
+                    genomic_biomarker: document.getElementById('s6-biomarker').value,
+                    treatment_name: document.getElementById('s6-treatment').value,
+                    ctDNA_level: parseFloat(document.getElementById('s6-ctdna').value) || 0.45,
+                    rising_ctdna_readings: parseInt(document.getElementById('s6-rising-ctdna').value) || 2,
+                    medical_image_provided: document.getElementById('s6-image-toggle').value === 'true',
+                    creatinine: parseFloat(document.getElementById('s6-cr').value) || 1.1,
+                    ALT: parseFloat(document.getElementById('s6-alt').value) || 45,
+                    AST: parseFloat(document.getElementById('s6-ast').value) || 42,
+                    bilirubin: parseFloat(document.getElementById('s6-bili').value) || 1.0,
+                    clinical_notes: document.getElementById('s6-notes').value
+                }
+            };
+
+            try {
+                const res = await fetch('/api/v1/agentic/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error("Agentic engine error: " + res.statusText);
+                const data = await res.json();
+
+                renderAgenticOutputs(data);
+            } catch (err) {
+                alert("Agentic Analysis Error: " + err.message);
+                resetAgenticStatusDots();
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    [ RUN AGENTIC ANALYSIS ]
+                `;
+            }
+        }
+
+        function renderAgenticOutputs(data) {
+            const resultsContainer = document.getElementById('s6-results-container');
+            resultsContainer.style.display = 'flex';
+
+            // 1. Update Agent Status Indicators
+            const statuses = data.agent_statuses || {};
+            for (const id in statuses) {
+                const dot = document.getElementById(`agent-dot-${id}`);
+                const msg = document.getElementById(`agent-msg-${id}`);
+                if (dot) {
+                    const st = statuses[id].status;
+                    dot.className = 'agent-status-indicator ' + st.toLowerCase();
+                    if (st === 'Completed') dot.innerText = '✓';
+                    else if (st === 'Processing') dot.innerText = '⟳';
+                    else if (st === 'Warning') dot.innerText = '⚠';
+                    else if (st === 'Failed') dot.innerText = '✕';
+                    else dot.innerText = '○';
+                }
+                if (msg && statuses[id].message) {
+                    msg.innerText = statuses[id].message.substring(0, 32) + '...';
+                }
+            }
+
+            // 2. Safety Halt Check
+            const safetyStatus = data.safety_status || 'PASSED';
+            const isHalted = data.status === 'SAFETY_REVIEW_REQUIRED' || safetyStatus === 'SAFETY REVIEW REQUIRED';
+            if (isHalted) {
+                const haltBanner = document.getElementById('s6-safety-halt-banner');
+                haltBanner.style.display = 'flex';
+                document.getElementById('s6-safety-halt-text').innerText = (data.final_assessment && data.final_assessment.final_recommendation) || 'Critical clinical toxicity detected. Workflow halted for safety.';
+            }
+
+            // 3. Final Assessment Summary
+            const fa = data.final_assessment || {};
+            activeAgenticTraceId = fa.audit_trace_id || 'TRACE-001';
+            document.getElementById('s6-final-patient-meta').innerText = `Patient ID: ${data.patient_id} | Trace: ${activeAgenticTraceId} | Latency: ${data.execution_time_ms} ms`;
+            document.getElementById('s6-final-directive').innerText = fa.final_recommendation || 'Clinical consensus formed.';
+            
+            const statusPill = document.getElementById('s6-final-status-pill');
+            if (isHalted) {
+                statusPill.className = 'metric-badge red';
+                statusPill.innerText = 'SAFETY REVIEW REQUIRED';
+            } else if (data.physician_override_active) {
+                statusPill.className = 'metric-badge yellow';
+                statusPill.innerText = 'PHYSICIAN OVERRIDDEN';
+            } else {
+                statusPill.className = 'metric-badge green';
+                statusPill.innerText = 'CONSENSUS ACHIEVED';
+            }
+
+            // Summaries breakdown
+            document.getElementById('s6-sum-ml').innerText = (fa.ml_risk_summary || '').split('.')[0] || 'Assessed';
+            document.getElementById('s6-sum-dl').innerText = (fa.dl_image_summary || '').split(':')[1] || 'DL Analysis';
+            document.getElementById('s6-sum-nlp').innerText = (fa.nlp_clinical_summary || '').split(':')[1] || 'Triage';
+            document.getElementById('s6-sum-safety').innerText = fa.safety_status || 'PASSED';
+            document.getElementById('s6-sum-safety').style.color = isHalted ? '#dc2626' : '#059669';
+
+            // 4. Treatment Optimization List
+            const txList = document.getElementById('s6-treatment-options-list');
+            txList.innerHTML = '';
+            (data.treatment_options || []).forEach(opt => {
+                txList.innerHTML += `
+                    <div style="background: #f8fafc; border: 1px solid var(--border-card); border-radius: 6px; padding: 0.85rem;">
+                        <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.35rem;">
+                            <strong style="font-size: 0.84rem; color: #0f172a;">Priority ${opt.priority_rank}: ${opt.regimen_name}</strong>
+                            <span class="metric-badge blue" style="font-size: 0.65rem;">${opt.category}</span>
+                        </div>
+                        <p style="font-size: 0.76rem; color: #334155; margin-bottom: 0.25rem;"><strong>Expected Benefit:</strong> ${opt.expected_benefit}</p>
+                        <p style="font-size: 0.74rem; color: #64748b; margin-bottom: 0.25rem;"><strong>Toxicity & Suitability:</strong> ${opt.renal_hepatic_suitability}</p>
+                        ${opt.safety_warnings && opt.safety_warnings.length > 0 ? `<div style="font-size: 0.7rem; color: #b45309; font-weight: 600; margin-top: 0.3rem;">⚠️ ${opt.safety_warnings[0]}</div>` : ''}
+                    </div>
+                `;
+            });
+
+            // 5. Clinical Trial Matches List
+            const trialList = document.getElementById('s6-trial-matches-list');
+            trialList.innerHTML = '';
+            const trials = data.matched_trials || [];
+            document.getElementById('s6-trial-count-badge').innerText = `${trials.length} PROTOCOLS MATCHED`;
+            trials.forEach(tr => {
+                trialList.innerHTML += `
+                    <div class="trial-card-item">
+                        <div class="trial-card-header">
+                            <div>
+                                <h4>${tr.trial_name}</h4>
+                                <div class="trial-meta-pills">
+                                    <span class="trial-meta-pill">${tr.trial_id}</span>
+                                    <span class="trial-meta-pill">${tr.phase}</span>
+                                    <span class="trial-meta-pill match">Match Score: ${tr.matching_score}%</span>
+                                    <span class="trial-meta-pill" style="font-weight: 700; color: ${tr.open_slots > 0 ? '#059669' : '#dc2626'};">${tr.open_slots} Open Slots</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.76rem; color: #475569; margin-top: 0.4rem;">
+                            <strong>Eligibility:</strong> <span style="color: ${tr.eligibility_status.includes('Eligible') ? '#059669' : '#b45309'}; font-weight: 600;">${tr.eligibility_status}</span>
+                        </p>
+                        <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.35rem; font-style: italic;">
+                            Source: ${tr.data_source}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // 6. Decision Trace Table
+            const traceTbody = document.getElementById('s6-decision-trace-tbody');
+            traceTbody.innerHTML = '';
+            const traces = data.decision_traces || [];
+            document.getElementById('s6-trace-count-pill').innerText = `${traces.length} STEPS AUDITED`;
+            traces.forEach(t => {
+                const stClass = t.status === 'Completed' ? 'green' : (t.status === 'Warning' ? 'yellow' : (t.status === 'Failed' ? 'red' : 'blue'));
+                traceTbody.innerHTML += `
+                    <tr>
+                        <td><span class="step-badge">${t.step_number}</span></td>
+                        <td><strong>${t.agent_name}</strong></td>
+                        <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #0284c7;">${t.tool_or_api}</span></td>
+                        <td><span class="metric-badge ${stClass}" style="font-size: 0.65rem;">${t.status}</span></td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #94a3b8;">${t.timestamp}</td>
+                        <td style="line-height: 1.45;">${t.reasoning_summary}</td>
+                    </tr>
+                `;
+            });
+
+            // 7. Safety Checks Grid
+            const safetyGrid = document.getElementById('s6-safety-checks-grid');
+            safetyGrid.innerHTML = '';
+            const checks = data.safety_checks || [];
+            checks.forEach(chk => {
+                const passed = chk.passed;
+                safetyGrid.innerHTML += `
+                    <div style="background: ${passed ? '#f0fdf4' : '#fef2f2'}; border: 1px solid ${passed ? '#bbf7d0' : '#fecaca'}; border-radius: 6px; padding: 0.65rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-size: 0.74rem; font-weight: 700; color: ${passed ? '#166534' : '#991b1b'};">${chk.check_name}</span>
+                            <span style="font-size: 0.75rem;">${passed ? '✓' : '🚨'}</span>
+                        </div>
+                        <p style="font-size: 0.68rem; color: ${passed ? '#15803d' : '#b91c1c'}; margin-top: 0.25rem; line-height: 1.35;">${chk.clinical_finding}</p>
+                    </div>
+                `;
+            });
+
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function togglePauseAgentic() {
+            const btn = document.getElementById('btn-pause-agentic');
+            if (!isAgenticPaused) {
+                await fetch('/api/v1/agentic/pause', { method: 'POST' });
+                isAgenticPaused = true;
+                btn.innerText = '[ RESUME AGENT ]';
+                btn.style.background = '#0284c7';
+                alert("Agentic execution paused by physician.");
+            } else {
+                await fetch('/api/v1/agentic/resume', { method: 'POST' });
+                isAgenticPaused = false;
+                btn.innerText = '[ PAUSE AGENT ]';
+                btn.style.background = '#334155';
+                alert("Agentic execution resumed by physician.");
+            }
+        }
+
+        async function stopAgentic() {
+            await fetch('/api/v1/agentic/stop', { method: 'POST' });
+            alert("Agentic workflow execution terminated by physician.");
+            resetAgenticStatusDots();
+        }
+
+        async function promptPhysicianOverride() {
+            const reason = prompt("Enter Physician Clinical Override Rationale (recorded in Stage 06 audit trail):", "Physician directs standard-of-care systemic therapy due to patient clinical preference and local monitoring availability.");
+            if (!reason) return;
+
+            const pid = document.getElementById('s6-patient-id').value;
+            const res = await fetch('/api/v1/agentic/override', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    trace_id: activeAgenticTraceId || 'TRACE-001',
+                    patient_id: pid,
+                    reason: reason,
+                    new_order: "Physician active clinical override applied."
+                })
+            });
+            const data = await res.json();
+            document.getElementById('s6-override-badge').style.display = 'inline-block';
+            alert("PHYSICIAN OVERRIDE ACTIVE. Logged in Stage 06 audit records.");
         }
 
         // Auto-load high risk preset on start

@@ -1,0 +1,50 @@
+{
+  "source": "FDA Oncology Package Inserts & Clinical Pharmacology Formulary",
+  "drugs": [
+    {
+      "name": "Osimertinib",
+      "class": "Third-Generation EGFR TKI",
+      "standard_dose": "80 mg PO daily",
+      "renal_adjustment": "No dose adjustment required for mild to moderate renal impairment; monitor if Cr > 2.0.",
+      "hepatic_adjustment": "Withhold if ALT/AST > 5x ULN; resume at 40 mg upon recovery to Grade <= 1.",
+      "critical_contraindications": ["Concurrent strong CYP3A4 inducers (Rifampin, St. John's Wort)", "Baseline QTc > 480 ms"],
+      "expected_benefit": "Median PFS 18.9 months; high CNS penetrance."
+    },
+    {
+      "name": "Sotorasib",
+      "class": "KRAS G12C Inhibitor",
+      "standard_dose": "960 mg PO daily",
+      "renal_adjustment": "No adjustment for CrCl >= 30 mL/min.",
+      "hepatic_adjustment": "Hold for Grade >= 2 liver transaminase elevation (ALT/AST > 3x ULN).",
+      "critical_contraindications": ["Severe hepatic impairment (Child-Pugh C)", "Concomitant acid-reducing agents without timing separation"],
+      "expected_benefit": "Overall response rate 37.1%; disease control rate 80.6%."
+    },
+    {
+      "name": "Pembrolizumab",
+      "class": "Anti-PD-1 Monoclonal Antibody",
+      "standard_dose": "200 mg IV Q3W or 400 mg IV Q6W",
+      "renal_adjustment": "Hold for immune-mediated nephritis (Cr > 1.5x baseline); permanent discontinuation if Cr > 3x.",
+      "hepatic_adjustment": "Withhold for Grade 2 hepatitis (ALT/AST 3-5x ULN). Permanent discontinuation for ALT/AST > 5x.",
+      "critical_contraindications": ["Severe active autoimmune disease requiring systemic immunosuppression", "Prior solid organ allograft"],
+      "expected_benefit": "Durable immune control; 5-year OS benefit in PD-L1 positive tumors."
+    },
+    {
+      "name": "Carboplatin + Pemetrexed",
+      "class": "Platinum-Doublet Cytotoxic Chemotherapy",
+      "standard_dose": "Carboplatin AUC 5 + Pemetrexed 500 mg/m2 IV Q3W",
+      "renal_adjustment": "Contraindicated if CrCl < 45 mL/min (Pemetrexed excretion impaired).",
+      "hepatic_adjustment": "Dose reduction if Bilirubin > 1.5x ULN.",
+      "critical_contraindications": ["CrCl < 45 mL/min", "Absolute neutrophil count < 1500 /uL", "Platelets < 100,000 /uL"],
+      "expected_benefit": "Established standard second-line salvage; overall response rate 30-35%."
+    },
+    {
+      "name": "Olaparib",
+      "class": "PARP Inhibitor",
+      "standard_dose": "300 mg PO BID",
+      "renal_adjustment": "Reduce to 200 mg BID for CrCl 31-50 mL/min; contraindicated if CrCl <= 30.",
+      "hepatic_adjustment": "Monitor closely in moderate hepatic impairment.",
+      "critical_contraindications": ["Severe myelosuppression", "Concomitant strong CYP3A inducers"],
+      "expected_benefit": "Significant PFS prolongation in BRCA-mutated malignancies."
+    }
+  ]
+}

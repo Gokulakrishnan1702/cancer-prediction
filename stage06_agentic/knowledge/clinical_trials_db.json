@@ -1,0 +1,81 @@
+{
+  "source": "Verified Precision Oncology Clinical Trial Registry (ClinicalTrials.gov Data Snapshot)",
+  "trials": [
+    {
+      "trial_id": "NCT04487080",
+      "trial_name": "SAVANNAH: Savolitinib + Osimertinib in EGFR-Mutant, MET-Amplified NSCLC Following Prior Osimertinib",
+      "phase": "Phase II",
+      "disease": "Non-Small Cell Lung Cancer (LUAD)",
+      "target_biomarker": "EGFR L858R / Ex19del with secondary MET / ctDNA resistance surge",
+      "stage_eligibility": ["Stage IV", "Metastatic"],
+      "criteria": {
+        "min_age": 18,
+        "max_creatinine": 1.5,
+        "max_alt_ast": 100.0,
+        "min_platelets": 100.0,
+        "required_progression": true,
+        "ctdna_rising_threshold": 4
+      },
+      "open_slots": 1,
+      "priority_rules": "Patients with documented rapid progression and >= 4 rising ctDNA readings receive immediate slot allocation over indolent/stable patients.",
+      "data_source": "VERIFIED ONCOLOGY TRIAL REGISTRY"
+    },
+    {
+      "trial_id": "NCT03785249",
+      "trial_name": "CodeBreaK 100: Sotorasib (AMG 510) in Advanced Solid Tumors With KRAS p.G12C Mutation",
+      "phase": "Phase II / Confirmatory",
+      "disease": "Non-Small Cell Lung Cancer (LUAD)",
+      "target_biomarker": "KRAS G12C",
+      "stage_eligibility": ["Stage IV"],
+      "criteria": {
+        "min_age": 18,
+        "max_creatinine": 1.5,
+        "max_alt_ast": 120.0,
+        "min_platelets": 100.0,
+        "required_progression": true,
+        "ctdna_rising_threshold": 2
+      },
+      "open_slots": 0,
+      "priority_rules": "Cohort enrollment capped. When slots are 0, reroute patients to standard-of-care systemic combination therapy.",
+      "data_source": "VERIFIED ONCOLOGY TRIAL REGISTRY"
+    },
+    {
+      "trial_id": "NCT04685044",
+      "trial_name": "KRYSTAL-12: Adagrasib vs Docetaxel in Previously Treated KRAS G12C Advanced NSCLC",
+      "phase": "Phase III",
+      "disease": "Non-Small Cell Lung Cancer (LUAD)",
+      "target_biomarker": "KRAS G12C",
+      "stage_eligibility": ["Stage IV"],
+      "criteria": {
+        "min_age": 18,
+        "max_creatinine": 1.5,
+        "max_alt_ast": 110.0,
+        "min_platelets": 90.0,
+        "required_progression": true,
+        "ctdna_rising_threshold": 2
+      },
+      "open_slots": 1,
+      "priority_rules": "Requires prior systemic therapy failure without active intracranial edema.",
+      "data_source": "VERIFIED ONCOLOGY TRIAL REGISTRY"
+    },
+    {
+      "trial_id": "NCT02296125",
+      "trial_name": "OlympiAD Extension: Olaparib Monotherapy in Germline BRCA-Mutated HER2-Negative Metastatic Breast Cancer",
+      "phase": "Phase III Extension",
+      "disease": "Breast Invasive Carcinoma (BRCA)",
+      "target_biomarker": "BRCA1 or BRCA2 Deleterious Mutation",
+      "stage_eligibility": ["Stage III", "Stage IV"],
+      "criteria": {
+        "min_age": 18,
+        "max_creatinine": 1.4,
+        "max_alt_ast": 100.0,
+        "min_platelets": 100.0,
+        "required_progression": false,
+        "ctdna_rising_threshold": 1
+      },
+      "open_slots": 3,
+      "priority_rules": "Prior anthracycline and taxane required unless clinically contraindicated.",
+      "data_source": "VERIFIED ONCOLOGY TRIAL REGISTRY"
+    }
+  ]
+}

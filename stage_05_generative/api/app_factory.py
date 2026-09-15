@@ -1,3 +1,5 @@
+import sys
+from pathlib import Path
 import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
@@ -7,11 +9,17 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.encoders import jsonable_encoder
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+# Ensure project root is in sys.path for Stage 06 agentic imports
+_PROJECT_ROOT = str(Path(__file__).resolve().parent.parent.parent)
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
 from api.dependencies import get_sql_store, get_vector_store, get_model_evaluator
 from api.routes.patients import router as patients_router
 from api.routes.simulation import router as simulation_router
 from api.routes.reports import router as reports_router
 from api.routes.pipeline import router as pipeline_router
+from stage06_agentic.api.routes import router as agentic_router
 
 logger = logging.getLogger("cdss_gateway")
 
@@ -96,6 +104,9 @@ def create_app() -> FastAPI:
 
     app.include_router(reports_router)
     logger.info("[ROUTE REGISTERED] Registered router: /api/v1/reports")
+
+    app.include_router(agentic_router)
+    logger.info("[ROUTE REGISTERED] Registered router: /api/v1/agentic")
 
     # 4. Root & Health Check Endpoints
     @app.get("/", tags=["Gateway Status"])
