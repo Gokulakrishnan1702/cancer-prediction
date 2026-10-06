@@ -1,0 +1,1393 @@
+"""
+Clinical Decision Support System (CDSS) - Login View & Authentication HTML
+==========================================================================
+Unified modern clinical login interface for Oncology Patient Risk Prediction.
+"""
+
+LOGIN_HTML = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical AI Portal — Login | Oncology Decision Support System</title>
+    <meta name="description" content="Secure clinical login portal for the Multi-Stage Oncology Clinical Decision Support System (CDSS) for AI Patient Risk Prediction.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #030a16;
+            --bg-surface: #07152b;
+            --bg-card: rgba(11, 30, 63, 0.72);
+            --bg-card-solid: #0d2246;
+            --bg-input: rgba(15, 37, 74, 0.85);
+            --border-subtle: rgba(56, 189, 248, 0.18);
+            --border-focus: #38bdf8;
+            --border-hover: rgba(56, 189, 248, 0.45);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent-cyan: #38bdf8;
+            --accent-blue: #2563eb;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --shadow-glow: 0 0 35px rgba(56, 189, 248, 0.22);
+            --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', var(--font-sans);
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 2rem 1.25rem;
+        }
+
+        /* Canvas Particle Background */
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.65;
+        }
+
+        /* Ambient Glow Orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse-slow 10s ease-in-out infinite alternate;
+        }
+        .orb-1 {
+            width: 520px;
+            height: 520px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(37, 99, 235, 0) 70%);
+            top: -100px;
+            right: -100px;
+        }
+        .orb-2 {
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(56, 189, 248, 0) 70%);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 70%);
+            top: 40%;
+            left: 30%;
+        }
+
+        @keyframes pulse-slow {
+            0% { transform: scale(0.95) translate(0, 0); opacity: 0.7; }
+            100% { transform: scale(1.1) translate(20px, -20px); opacity: 1; }
+        }
+
+        /* Main Container */
+        .portal-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1180px;
+            display: grid;
+            grid-template-columns: 1.05fr 1.15fr;
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+            overflow: hidden;
+            animation: fadeInCard 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(24px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Left Side: Clinical Telemetry Showcase */
+        .showcase-pane {
+            background: linear-gradient(165deg, rgba(7, 21, 43, 0.95) 0%, rgba(11, 30, 63, 0.85) 100%);
+            border-right: 1px solid var(--border-subtle);
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .showcase-pane::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0.4) 50%, rgba(56, 189, 248, 0) 100%);
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo-hex {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 4px 18px rgba(37, 99, 235, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            position: relative;
+        }
+
+        .brand-logo-hex svg {
+            width: 26px;
+            height: 26px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .brand-name {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .brand-tagline {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Showcase Hero Info */
+        .showcase-hero {
+            margin: 2.2rem 0;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-cyan);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            margin-bottom: 1.25rem;
+        }
+
+        .pulse-live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-emerald);
+            box-shadow: 0 0 10px var(--accent-emerald);
+            animation: pulse-green 1.8s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+
+        .showcase-hero h1 {
+            font-family: var(--font-display);
+            font-size: 1.95rem;
+            font-weight: 800;
+            line-height: 1.22;
+            color: #ffffff;
+            margin-bottom: 0.9rem;
+            letter-spacing: -0.03em;
+        }
+
+        .showcase-hero h1 span {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .showcase-hero p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+
+        /* 6-Stage Live Status Badges */
+        .stage-pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stage-telemetry-chip {
+            background: rgba(15, 37, 74, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 0.7rem 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            transition: all 0.2s ease;
+        }
+
+        .stage-telemetry-chip:hover {
+            border-color: rgba(56, 189, 248, 0.35);
+            background: rgba(21, 51, 96, 0.75);
+            transform: translateY(-1px);
+        }
+
+        .chip-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .chip-s1 { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+        .chip-s2 { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+        .chip-s3 { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+        .chip-s4 { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        .chip-s5 { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .chip-s6 { background: rgba(2, 132, 199, 0.2); color: #38bdf8; }
+
+        .chip-content {
+            overflow: hidden;
+        }
+
+        .chip-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        .chip-status {
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Compliance & Security Footer */
+        .showcase-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent-emerald);
+            font-weight: 500;
+        }
+
+        /* Right Side: Login Form Interface */
+        .login-pane {
+            padding: 3rem 2.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(7, 21, 43, 0.55);
+        }
+
+        .login-header-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-header-group h2 {
+            font-family: var(--font-display);
+            font-size: 1.65rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-bottom: 0.35rem;
+        }
+
+        .login-header-group p {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+        }
+
+        /* Quick Clinician Persona Presets */
+        .persona-presets-box {
+            background: rgba(11, 30, 63, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preset-title {
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .btn-persona {
+            background: rgba(15, 37, 74, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            padding: 0.45rem 0.65rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-persona:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(37, 99, 235, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-persona.active {
+            border-color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.18);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+        }
+
+        .persona-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .persona-meta {
+            overflow: hidden;
+        }
+
+        .persona-name {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #ffffff;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .persona-role {
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.15rem;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.45rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 0.95rem;
+            width: 17px;
+            height: 17px;
+            color: var(--text-dim);
+            pointer-events: none;
+            transition: color 0.2s ease;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem 0.75rem 2.6rem;
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-size: 0.86rem;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--border-focus);
+            background: rgba(18, 45, 90, 0.95);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+
+        .form-control:focus + .input-icon,
+        .input-wrapper:focus-within .input-icon {
+            color: var(--accent-cyan);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-dim);
+            font-size: 0.82rem;
+        }
+
+        /* Select styling */
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.85rem center;
+            background-size: 16px;
+            padding-right: 2.2rem;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background-color: var(--bg-card-solid);
+            color: var(--text-main);
+        }
+
+        /* Password toggle */
+        .toggle-password {
+            position: absolute;
+            right: 0.85rem;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .toggle-password:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Row options */
+        .form-options-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.35rem;
+            font-size: 0.78rem;
+        }
+
+        .remember-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .custom-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            background: var(--bg-input);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .custom-checkbox svg {
+            width: 11px;
+            height: 11px;
+            color: #ffffff;
+            display: none;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]:checked + .custom-checkbox {
+            background: var(--accent-blue);
+            border-color: var(--accent-cyan);
+        }
+
+        input[type="checkbox"]:checked + .custom-checkbox svg {
+            display: block;
+        }
+
+        .link-help {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .link-help:hover {
+            text-decoration: underline;
+        }
+
+        /* Primary Action Button */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #1d4ed8 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            font-weight: 700;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%);
+            transform: rotate(45deg) translateY(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.5);
+            background: linear-gradient(135deg, #0396e0 0%, #2b6df5 50%, #1e53e5 100%);
+        }
+
+        .btn-submit:hover::after {
+            transform: rotate(45deg) translateY(100%);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-submit:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* SSO Divider & Alternate login */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .auth-divider::before, .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .sso-buttons-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .btn-sso {
+            background: rgba(15, 37, 74, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 0.65rem 0.85rem;
+            color: var(--text-main);
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-sso:hover {
+            background: rgba(21, 51, 96, 0.85);
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-sso svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Loading / Authenticaton Modal / Overlay */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 10, 22, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .auth-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .auth-card-modal {
+            background: var(--bg-card-solid);
+            border: 1px solid var(--accent-cyan);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            max-width: 440px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+            animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .auth-spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .spinner-ring {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid rgba(56, 189, 248, 0.15);
+            border-top-color: var(--accent-cyan);
+            border-right-color: var(--accent-blue);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-step {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.25rem;
+        }
+
+        .auth-progress-track {
+            background: rgba(15, 37, 74, 0.8);
+            border-radius: 999px;
+            height: 6px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .auth-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8 0%, #10b981 100%);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+
+        /* Alert Toast */
+        .toast-msg {
+            margin-top: 1rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .toast-error {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fecdd3;
+        }
+
+        .toast-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #a7f3d0;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 960px) {
+            .portal-wrapper {
+                grid-template-columns: 1fr;
+                max-width: 540px;
+            }
+            .showcase-pane {
+                padding: 2rem 1.75rem;
+            }
+            .login-pane {
+                padding: 2.2rem 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glow Orbs -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- Background Particle Canvas -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Main Login Card Wrapper -->
+    <main class="portal-wrapper">
+        
+        <!-- Left Pane: System Overview & Telemetry -->
+        <section class="showcase-pane">
+            <div>
+                <!-- Brand Header -->
+                <div class="brand-header">
+                    <div class="brand-logo-hex">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="brand-name">ONCO-CDSS</div>
+                        <div class="brand-tagline">Clinical Decision Support AI</div>
+                    </div>
+                </div>
+
+                <!-- Showcase Hero -->
+                <div class="showcase-hero">
+                    <div class="hero-pill">
+                        <span class="pulse-live-dot"></span>
+                        GATEWAY v2.0.0 ONLINE
+                    </div>
+                    <h1>Autonomous <span>Oncology Intelligence</span> Portal</h1>
+                    <p>Secure clinical workstation integrating 6-stage machine learning, deep radiomics, NLP pathology extraction, fine-tuned SLM reasoning, and autonomous multi-agent deliberation.</p>
+                </div>
+
+                <!-- 6-Stage Telemetry Micro Grid -->
+                <div class="stage-pipeline-grid">
+                    <div class="stage-telemetry-chip">
+                        <div class="chip-icon chip-s1">01</div>
+                        <div class="chip-content">
+                            <div class="chip-label">Treatment Safety</div>
+                            <div class="chip-status">AUC 0.994 ✓</div>
+                        </div>
+                    </div>
+                    <div class="stage-telemetry-chip">
+                        <div class="chip-icon chip-s2">02</div>
+                        <div class="chip-content">
+                            <div class="chip-label">DL Progression</div>
+                            <div class="chip-status">DenseNet-121 ✓</div>
+                        </div>
+                    </div>
+                    <div class="stage-telemetry-chip">
+                        <div class="chip-icon chip-s3">03</div>
+                        <div class="chip-content">
+                            <div class="chip-label">NLP Extraction</div>
+                            <div class="chip-status">BioClinicalBERT ✓</div>
+                        </div>
+                    </div>
+                    <div class="stage-telemetry-chip">
+                        <div class="chip-icon chip-s4">04</div>
+                        <div class="chip-content">
+                            <div class="chip-label">Clinical AI Assistant</div>
+                            <div class="chip-status">QLoRA 3B Active ✓</div>
+                        </div>
+                    </div>
+                    <div class="stage-telemetry-chip">
+                        <div class="chip-icon chip-s5">05</div>
+                        <div class="chip-content">
+                            <div class="chip-label">Clinical Report</div>
+                            <div class="chip-status">10k Synthetic Cohort ✓</div>
+                        </div>
+                    </div>
+                    <div class="stage-telemetry-chip">
+                        <div class="chip-icon chip-s6">06</div>
+                        <div class="chip-content">
+                            <div class="chip-label">AI Care Workflow</div>
+                            <div class="chip-status">Autonomous Multi-Agent ✓</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Badge -->
+            <div class="showcase-footer">
+                <div class="security-badge">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    HIPAA & FDA SaMD Governance Ready
+                </div>
+                <div>TLS 1.3 / AES-256</div>
+            </div>
+        </section>
+
+        <!-- Right Pane: Authentication Form -->
+        <section class="login-pane">
+            <div class="login-header-group">
+                <h2>Clinical Sign In</h2>
+                <p>Authenticate with institutional credentials or select a verified clinician persona.</p>
+            </div>
+
+            <!-- Quick Clinician Persona Presets -->
+            <div class="persona-presets-box">
+                <div class="preset-title">
+                    <span>⚡ Quick Clinician Persona</span>
+                    <span style="font-size: 0.62rem; color: var(--text-dim);">1-Click Fill</span>
+                </div>
+                <div class="preset-grid">
+                    <button type="button" class="btn-persona active" onclick="selectPersona('oncologist')">
+                        <div class="persona-avatar">🩺</div>
+                        <div class="persona-meta">
+                            <div class="persona-name">Dr. Sarah Chen, MD</div>
+                            <div class="persona-role">Chief Oncologist</div>
+                        </div>
+                    </button>
+                    <button type="button" class="btn-persona" onclick="selectPersona('fellow')">
+                        <div class="persona-avatar">🔬</div>
+                        <div class="persona-meta">
+                            <div class="persona-name">Dr. Marcus Vance, MD</div>
+                            <div class="persona-role">Research Fellow</div>
+                        </div>
+                    </button>
+                    <button type="button" class="btn-persona" onclick="selectPersona('auditor')">
+                        <div class="persona-avatar">🛡️</div>
+                        <div class="persona-meta">
+                            <div class="persona-name">Elena Rostova, PharmD</div>
+                            <div class="persona-role">AI Safety Auditor</div>
+                        </div>
+                    </button>
+                    <button type="button" class="btn-persona" onclick="selectPersona('ml_eng')">
+                        <div class="persona-avatar">📊</div>
+                        <div class="persona-meta">
+                            <div class="persona-name">Alex Rivera, MS</div>
+                            <div class="persona-role">Lead ML Scientist</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Form -->
+            <form id="clinical-login-form" onsubmit="handleLoginSubmit(event)">
+                
+                <!-- Staff ID / NPI -->
+                <div class="form-group">
+                    <label class="form-label" for="inp-staff-id">
+                        Hospital Staff ID / NPI Number
+                    </label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="inp-staff-id" 
+                            class="form-control" 
+                            placeholder="e.g. NPI-8842109 or s.chen@onco-ai.hospital"
+                            value="dr.chen@mskcc-oncology.org"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Oncology Specialty / Department -->
+                <div class="form-group">
+                    <label class="form-label" for="inp-department">
+                        Clinical Department / Station
+                    </label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                        <select id="inp-department" class="form-control">
+                            <option value="Thoracic Oncology & Molecular Tumor Board">Thoracic Oncology & Molecular Tumor Board</option>
+                            <option value="Breast & GYN Precision Oncology">Breast & GYN Precision Oncology</option>
+                            <option value="Gastrointestinal Oncology & DILI Surveillance">Gastrointestinal Oncology & DILI Surveillance</option>
+                            <option value="Hematology & Cellular Therapy">Hematology & Cellular Therapy</option>
+                            <option value="AI Safety & Model Governance Board">AI Safety & Model Governance Board</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Password Key -->
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="inp-password">Passcode / Cryptographic Key</label>
+                        <a href="javascript:void(0)" onclick="alert('Temporary Security Key is: ONCO-2026-STAGE6-SECURE')" class="link-help">Forgot Key?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <input 
+                            type="password" 
+                            id="inp-password" 
+                            class="form-control" 
+                            placeholder="••••••••••••••••"
+                            value="ONCO-STAGE6-CLEARANCE"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility()" aria-label="Toggle password view">
+                            <svg id="eye-icon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Options Row -->
+                <div class="form-options-row">
+                    <label class="remember-wrap">
+                        <input type="checkbox" id="chk-remember" checked>
+                        <div class="custom-checkbox">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span>Keep clinical session active (8h)</span>
+                    </label>
+                    <span style="color: var(--accent-emerald); font-size: 0.72rem; font-family: var(--font-mono); font-weight: 600;">2FA Biometric Ready</span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="btn-login" class="btn-submit">
+                    <span>ENTER CLINICAL WORKSTATION</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Toast feedback -->
+                <div id="toast-feedback" class="toast-msg"></div>
+
+                <!-- SSO / EHR Integration Divider -->
+                <div class="auth-divider">Or Hospital SSO / Smartcard</div>
+
+                <div class="sso-buttons-row">
+                    <button type="button" class="btn-sso" onclick="simulateSSO('Epic EHR FHIR')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                        Epic EHR / SMART
+                    </button>
+                    <button type="button" class="btn-sso" onclick="simulateSSO('Hospital SAML 2.0')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        Hospital SAML 2.0
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Verification Animation Modal -->
+    <div id="auth-modal" class="auth-overlay">
+        <div class="auth-card-modal">
+            <div class="auth-spinner">
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="modal-title" id="auth-modal-title">Authenticating Clinician...</div>
+            <div class="modal-step" id="auth-modal-step">Querying Hospital NPI Registry & NLP BioBERT Guardrails...</div>
+            <div class="auth-progress-track">
+                <div class="auth-progress-bar" id="auth-progress-bar"></div>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono);">
+                STAGE 01-06 NEURAL INTERFACES INITIALIZING
+            </p>
+        </div>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Preset Personas Data
+        const PERSONAS = {
+            oncologist: {
+                name: "Dr. Sarah Chen, MD, PhD",
+                staffId: "dr.chen@mskcc-oncology.org",
+                role: "Chief of Thoracic Oncology",
+                dept: "Thoracic Oncology & Molecular Tumor Board",
+                pass: "ONCO-STAGE6-CLEARANCE",
+                clearance: "Level 4 (Full System & Override Authorization)"
+            },
+            fellow: {
+                name: "Dr. Marcus Vance, MD",
+                staffId: "m.vance@stanford-fellow.edu",
+                role: "Precision Oncology Fellow",
+                dept: "Breast & GYN Precision Oncology",
+                pass: "ONCO-STAGE6-FELLOW",
+                clearance: "Level 2 (Diagnostic & NLP Analysis)"
+            },
+            auditor: {
+                name: "Elena Rostova, PharmD",
+                staffId: "e.rostova@fda-safety-board.gov",
+                role: "AI Safety & Ethics Auditor",
+                dept: "AI Safety & Model Governance Board",
+                pass: "ONCO-STAGE6-AUDITOR",
+                clearance: "Level 3 (Safety Interlock & Audit)"
+            },
+            ml_eng: {
+                name: "Alex Rivera, MS",
+                staffId: "a.rivera@onco-ai-research.org",
+                role: "Lead Clinical ML Scientist",
+                dept: "Gastrointestinal Oncology & DILI Surveillance",
+                pass: "ONCO-STAGE6-MLDEV",
+                clearance: "Level 4 (Stress Testing & Model Benchmarking)"
+            }
+        };
+
+        let currentSelectedPersona = 'oncologist';
+
+        function selectPersona(key) {
+            currentSelectedPersona = key;
+            const p = PERSONAS[key];
+            if (!p) return;
+
+            document.getElementById('inp-staff-id').value = p.staffId;
+            document.getElementById('inp-department').value = p.dept;
+            document.getElementById('inp-password').value = p.pass;
+
+            // Highlight active button
+            document.querySelectorAll('.btn-persona').forEach(btn => btn.classList.remove('active'));
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            showToast(`Loaded credentials for ${p.name} (${p.role})`, 'success');
+        }
+
+        function togglePasswordVisibility() {
+            const pwdInp = document.getElementById('inp-password');
+            const isPass = pwdInp.type === 'password';
+            pwdInp.type = isPass ? 'text' : 'password';
+        }
+
+        function showToast(msg, type = 'error') {
+            const toast = document.getElementById('toast-feedback');
+            toast.className = `toast-msg toast-${type}`;
+            toast.style.display = 'flex';
+            toast.innerHTML = `
+                <span>${type === 'success' ? '✓' : '⚠️'}</span>
+                <span>${msg}</span>
+            `;
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3800);
+        }
+
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+
+            const staffId = document.getElementById('inp-staff-id').value.trim();
+            const password = document.getElementById('inp-password').value.trim();
+            const dept = document.getElementById('inp-department').value;
+            const remember = document.getElementById('chk-remember').checked;
+
+            if (!staffId || !password) {
+                showToast('Please enter both Staff ID and Passcode.');
+                return;
+            }
+
+            // Find persona details
+            const persona = PERSONAS[currentSelectedPersona] || {
+                name: staffId.split('@')[0].toUpperCase(),
+                staffId: staffId,
+                role: "Clinical Practitioner",
+                dept: dept,
+                clearance: "Level 3 (Clinical Assessment)"
+            };
+
+            // Display verification flow modal
+            const modal = document.getElementById('auth-modal');
+            const modalTitle = document.getElementById('auth-modal-title');
+            const modalStep = document.getElementById('auth-modal-step');
+            const progressBar = document.getElementById('auth-progress-bar');
+
+            modal.classList.add('active');
+
+            // Step 1
+            modalTitle.innerText = "Authenticating Clinician Identity...";
+            modalStep.innerText = `Verifying credentials for ${staffId}...`;
+            progressBar.style.width = "30%";
+
+            await new Promise(r => setTimeout(r, 500));
+
+            // Step 2
+            modalTitle.innerText = "Validating HIPAA & Security Clearance...";
+            modalStep.innerText = `Establishing encrypted TLS session with ${dept}...`;
+            progressBar.style.width = "70%";
+
+            await new Promise(r => setTimeout(r, 550));
+
+            // Step 3
+            modalTitle.innerText = "Loading Oncology AI Models (Stage 1 to 6)...";
+            modalStep.innerText = "Toxicity ML • DenseNet-121 • BioClinicalBERT • QLoRA 3B • Multi-Agent Ready";
+            progressBar.style.width = "100%";
+
+            await new Promise(r => setTimeout(r, 500));
+
+            // Store session in localStorage
+            const sessionData = {
+                authenticated: true,
+                staffId: staffId,
+                name: persona.name,
+                role: persona.role,
+                department: dept,
+                clearance: persona.clearance,
+                loginTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                loginDate: new Date().toISOString().split('T')[0]
+            };
+
+            localStorage.setItem('onco_auth_session', JSON.stringify(sessionData));
+
+            // Redirect to dashboard
+            window.location.href = '/';
+        }
+
+        function simulateSSO(provider) {
+            const modal = document.getElementById('auth-modal');
+            const modalTitle = document.getElementById('auth-modal-title');
+            const modalStep = document.getElementById('auth-modal-step');
+            const progressBar = document.getElementById('auth-progress-bar');
+
+            modal.classList.add('active');
+            modalTitle.innerText = `Connecting to ${provider}...`;
+            modalStep.innerText = "Exchanging OAuth 2.0 PKCE tokens & clinician credentials...";
+            progressBar.style.width = "50%";
+
+            setTimeout(() => {
+                progressBar.style.width = "100%";
+                modalStep.innerText = "Single Sign-On Authentication Approved.";
+                
+                const sessionData = {
+                    authenticated: true,
+                    staffId: "sso.physician@hospital-network.org",
+                    name: "Dr. Sarah Chen, MD, PhD",
+                    role: "Chief of Thoracic Oncology (SSO)",
+                    department: "Thoracic Oncology & Molecular Tumor Board",
+                    clearance: "Level 4 (Hospital SAML Authorized)",
+                    loginTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    loginDate: new Date().toISOString().split('T')[0]
+                };
+                localStorage.setItem('onco_auth_session', JSON.stringify(sessionData));
+
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 400);
+            }, 1000);
+        }
+
+        // ======================================================================
+        // Interactive Neural Particle Background Canvas
+        // ======================================================================
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationFrameId;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.7;
+                this.vy = (Math.random() - 0.5) * 0.7;
+                this.radius = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.4 ? '#38bdf8' : (Math.random() > 0.5 ? '#2563eb' : '#10b981');
+                this.alpha = Math.random() * 0.6 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.alpha;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor((canvas.width * canvas.height) / 14000), 75);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawConnections() {
+            const maxDist = 140;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < maxDist) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = '#38bdf8';
+                        ctx.globalAlpha = (1 - dist / maxDist) * 0.18;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            animationFrameId = requestAnimationFrame(animateCanvas);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animateCanvas();
+    </script>
+</body>
+</html>
+"""

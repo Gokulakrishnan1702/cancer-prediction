@@ -1,0 +1,16 @@
+==============================================
+PATIENT-LEVEL CLINICAL RISK EXPLANATION REPORT
+==============================================
+Predicted Toxicity Risk : High (Confidence: 99.5%)
+Actual Clinical Status  : High
+Full Probabilities      : [Low: 0.1%, Moderate: 0.3%, High: 99.5%]
+
+Key Patient Clinical Indicators:
+  • dosage_mg: 1666.5
+  • mutation_count: 7.0
+  • ctDNA_level: 2.32
+  • WBC: 7.41
+  • ALT: 67.4
+  • AST: 57.7
+  • liver_enzyme_sum: 125.10000000000001
+  • pulse_pressure: 58.19999999999999

@@ -4,8 +4,8 @@
   "adapter_path": "models/stage04_slm_qlora",
   "test_requests_executed": 10,
   "successful_responses": 10,
-  "average_latency_ms": 147.2,
-  "guardrail_escalations": 2,
+  "average_latency_ms": 149.5,
+  "guardrail_escalations": 5,
   "structural_compliance_rate": "100.0%",
   "under_triage_prevention_status": "ACTIVE_ZERO_RISK"
 }

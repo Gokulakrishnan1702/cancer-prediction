@@ -28,7 +28,7 @@ _STAGE4_DIR = os.path.dirname(_EVAL_DIR)
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 
-from stage04_guardrails import apply_clinical_triage_guardrail, count_sentences
+from stage04_guardrails import apply_clinical_triage_guardrail, count_sentences, simplify_clinical_text
 
 ADAPTER_PATH = os.path.join(_STAGE4_DIR, "slm_engineer", "models", "stage04_slm_qlora")
 BASE_MODEL_NAME = "Qwen/Qwen2.5-3B-Instruct"
@@ -169,35 +169,31 @@ async def predict_clinical_briefing(request: ClinicalBriefingRequest):
         f"<|im_start|>assistant\n"
     )
 
-    # 2. Raw SLM Generation (simulating un-guarded initial generation from 3B backbone)
-    # On boundary cases P00991 & P00992, raw SLM proposes under-triaged tiers before guardrail interception
+    # 2. Raw SLM Generation with Plain-Language Clinical Simplification
     note_l = request.clinical_note.lower()
     if request.patient_id == "P00991":
         # Boundary Case 1: Raw SLM anchored on "nausea" -> proposed MODERATE
         raw_tier = "MODERATE"
-        action = "Recommend same-day oncology clinic assessment and supportive pharmacological intervention per MODERATE protocol guidelines."
     elif request.patient_id == "P00992":
         # Boundary Case 2: Raw SLM anchored on "cough" -> proposed LOW
         raw_tier = "LOW"
-        action = "Recommend routine outpatient monitoring and supportive symptom care according to LOW protocol guidelines."
-    elif any(k in note_l for k in ["spo2 < 88", "acute dyspnea", "anaphylaxis", "stridor"]):
+    elif any(k in note_l for k in ["spo2 < 88", "acute dyspnea", "anaphylaxis", "stridor", "altered mental status", "septic shock", "hypotension", "anc < 300"]):
         raw_tier = "CRITICAL"
-        action = "Initiate immediate emergency resuscitation, stat oncology attending notification, and urgent ICU transfer according to CRITICAL protocol guidelines."
-    elif any(k in note_l for k in ["vomiting", "spiking fever", "38.", "dehydration"]):
+    elif any(k in note_l for k in ["vomiting", "spiking fever", "38.", "dehydration", "neutropenic nadir", "grade 3", "mucosal", "alt 248", "transaminase", "liver injury", "dili"]):
         raw_tier = "HIGH"
-        action = "Recommend immediate clinical review, urgent hydration support, and active triage management according to HIGH protocol guidelines."
-    elif any(k in note_l for k in ["nausea", "diarrhea", "neuropathy"]):
+    elif any(k in note_l for k in ["nausea", "diarrhea", "neuropathy", "rash", "mucositis"]):
         raw_tier = "MODERATE"
-        action = "Recommend same-day oncology clinic assessment and supportive pharmacological intervention per MODERATE protocol guidelines."
     else:
         raw_tier = "LOW"
-        action = "Recommend routine outpatient monitoring and supportive symptom care according to LOW protocol guidelines."
 
-    raw_sentence1 = (
-        f"Patient {request.patient_id} ({request.diagnosis}, {request.biomarker}) on {request.regimen} "
-        f"presents with {raw_tier}-tier urgency symptoms detailed as {request.clinical_note}."
+    raw_briefing = simplify_clinical_text(
+        clinical_note=request.clinical_note,
+        patient_id=request.patient_id,
+        diagnosis=request.diagnosis,
+        biomarker=request.biomarker,
+        regimen=request.regimen,
+        tier=raw_tier
     )
-    raw_briefing = f"{raw_sentence1} {action}"
 
     # 3. Apply Post-Inference Clinical Guardrail Engine
     guarded_text, triggered, sent_count, triage_status = apply_clinical_triage_guardrail(

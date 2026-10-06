@@ -39,7 +39,9 @@ _DATA_ENGINEER_DIR = os.path.dirname(_HERE)
 _STAGE4_DIR = os.path.dirname(_DATA_ENGINEER_DIR)
 _PROJECT_ROOT = os.path.dirname(_STAGE4_DIR)
 
-STAGE3_DATA_DIR = os.path.join(_PROJECT_ROOT, "Stage 3", "data_engineer", "data", "processed")
+STAGE3_DATA_DIR = os.path.join(_PROJECT_ROOT, "Stage3", "data_engineer", "data", "processed")
+if not os.path.exists(STAGE3_DATA_DIR):
+    STAGE3_DATA_DIR = os.path.join(_PROJECT_ROOT, "Stage 3", "data_engineer", "data", "processed")
 STAGE4_DATA_DIR = os.path.join(_DATA_ENGINEER_DIR, "data", "processed")
 STAGE4_OUT_DIR = os.path.join(_DATA_ENGINEER_DIR, "outputs")
 

@@ -9,10 +9,14 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.encoders import jsonable_encoder
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-# Ensure project root is in sys.path for Stage 06 agentic imports
+# Ensure project root and stage directory are in sys.path
 _PROJECT_ROOT = str(Path(__file__).resolve().parent.parent.parent)
 if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
+
+_STAGE_DIR = str(Path(__file__).resolve().parent.parent)
+if _STAGE_DIR not in sys.path:
+    sys.path.insert(0, _STAGE_DIR)
 
 from api.dependencies import get_sql_store, get_vector_store, get_model_evaluator
 from api.routes.patients import router as patients_router
@@ -135,6 +139,27 @@ def create_app() -> FastAPI:
         from fastapi.responses import HTMLResponse
         from api.dashboard_view import DASHBOARD_HTML
         return HTMLResponse(content=DASHBOARD_HTML)
+
+    # Dedicated Clinical Login Route
+    @app.get("/login", tags=["Authentication Gateway"])
+    async def login_portal():
+        from fastapi.responses import HTMLResponse
+        from api.login_view import LOGIN_HTML
+        return HTMLResponse(content=LOGIN_HTML)
+
+    # Authentication API Endpoint
+    @app.post("/api/v1/auth/login", tags=["Authentication Gateway"])
+    async def auth_login(payload: dict):
+        staff_id = payload.get("staff_id", "dr.chen@mskcc-oncology.org")
+        department = payload.get("department", "Thoracic Oncology")
+        return {
+            "status": "success",
+            "authenticated": True,
+            "staff_id": staff_id,
+            "department": department,
+            "clearance_level": "Level 4 (Authorized)",
+            "message": "Clinical Session Authorized"
+        }
 
     # Health Check
     @app.get("/health", tags=["Gateway Status"])

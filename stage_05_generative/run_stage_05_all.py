@@ -46,7 +46,8 @@ def run_tests():
     print(">>> STAGE 05: RUNNING AUTOMATED INTEGRATION TESTS <<<")
     print("=" * 60)
     import pytest
-    code = pytest.main(["tests/test_api_gateway.py", "-v"])
+    test_path = os.path.join(STAGE_ROOT, "tests", "test_api_gateway.py")
+    code = pytest.main([test_path, "-v"])
     return code
 
 

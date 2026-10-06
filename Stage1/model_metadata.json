@@ -4,61 +4,59 @@
     "Moderate",
     "High"
   ],
-  "test_accuracy": 0.9875,
-  "test_f1": 0.9875,
-  "test_roc_auc": 0.9992,
-  "high_risk_recall": 0.98,
-  "brier_score": 0.016,
+  "test_accuracy": 0.995,
+  "test_f1": 0.995,
+  "test_roc_auc": 0.9996,
   "top_features": [
     {
       "Feature": "mutation_count",
-      "Importance_Mean": 0.2765,
-      "Importance_Std": 0.02118962010041712
+      "Importance_Mean": 0.24949999999999997,
+      "Importance_Std": 0.017131841699011805
     },
     {
       "Feature": "dosage_mg",
-      "Importance_Mean": 0.16050000000000006,
-      "Importance_Std": 0.01258967831201417
-    },
-    {
-      "Feature": "temperature",
-      "Importance_Mean": 0.004000000000000026,
-      "Importance_Std": 0.001224744871391563
-    },
-    {
-      "Feature": "ctDNA_level",
-      "Importance_Mean": 0.003000000000000047,
-      "Importance_Std": 0.005099019513592796
+      "Importance_Mean": 0.13699999999999998,
+      "Importance_Std": 0.01278671185254445
     },
     {
       "Feature": "tumor_marker_level",
-      "Importance_Mean": 0.0030000000000000248,
-      "Importance_Std": 0.0018708286933869665
+      "Importance_Mean": 0.009499999999999998,
+      "Importance_Std": 0.0010000000000000232
+    },
+    {
+      "Feature": "ctDNA_level",
+      "Importance_Mean": 0.008499999999999997,
+      "Importance_Std": 0.0037416573867739473
     },
     {
       "Feature": "WBC",
-      "Importance_Mean": 0.0030000000000000027,
-      "Importance_Std": 0.00244948974278318
+      "Importance_Mean": 0.008499999999999975,
+      "Importance_Std": 0.0012247448713916173
+    },
+    {
+      "Feature": "temperature",
+      "Importance_Mean": 0.007999999999999985,
+      "Importance_Std": 0.0018708286933869782
+    },
+    {
+      "Feature": "liver_enzyme_sum",
+      "Importance_Mean": 0.007499999999999974,
+      "Importance_Std": 0.002738612787525813
+    },
+    {
+      "Feature": "hemoglobin",
+      "Importance_Mean": 0.006999999999999984,
+      "Importance_Std": 0.0018708286933869665
     },
     {
       "Feature": "spo2",
-      "Importance_Mean": 0.0025000000000000135,
-      "Importance_Std": 0.0022360679774997916
+      "Importance_Mean": 0.005999999999999983,
+      "Importance_Std": 0.001224744871391563
     },
     {
-      "Feature": "treatment_cycle",
-      "Importance_Mean": 0.0,
-      "Importance_Std": 0.0
-    },
-    {
-      "Feature": "sex",
-      "Importance_Mean": 0.0,
-      "Importance_Std": 0.0
-    },
-    {
-      "Feature": "age",
-      "Importance_Mean": 0.0,
-      "Importance_Std": 0.0
+      "Feature": "dose_change_percentage",
+      "Importance_Mean": 0.004499999999999993,
+      "Importance_Std": 0.0010000000000000232
     }
   ]
 }

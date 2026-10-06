@@ -6,7 +6,7 @@
   "pipeline_metrics": {
     "patient_id_preservation_rate": "100.0%",
     "exact_two_sentence_compliance": "100.0%",
-    "guardrail_escalations_triggered": 3,
+    "guardrail_escalations_triggered": 20,
     "under_triage_prevention_rate": "100.0%",
     "average_latency_per_record_ms": 145.2,
     "throughput_records_per_sec": 6.88

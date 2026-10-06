@@ -68,9 +68,9 @@ class PatientAnalysisRequest(BaseModel):
     image_file: Optional[str] = None
 
 
-@router.post("/run-all", summary="Run Complete 5-Stage AI Analysis")
+@router.post("/run-all", summary="Run Complete 6-Stage AI Analysis")
 async def run_complete_analysis(req: PatientAnalysisRequest):
-    """Executes ML -> DL -> NLP -> SLM -> GenAI sequentially and returns unified report."""
+    """Executes ML -> DL -> NLP -> SLM -> GenAI -> Agentic sequentially and returns unified report."""
     try:
         service = get_unified_pipeline_service()
         patient_dict = req.model_dump()
@@ -83,7 +83,7 @@ async def run_complete_analysis(req: PatientAnalysisRequest):
 
 @router.post("/stage/{stage_id}", summary="Run Individual AI Stage")
 async def run_single_stage(stage_id: str, req: PatientAnalysisRequest):
-    """Runs a single isolated stage (1=ML, 2=DL, 3=NLP, 4=SLM, 5=GenAI)."""
+    """Runs a single isolated stage (1=ML, 2=DL, 3=NLP, 4=SLM, 5=GenAI, 6=Agentic)."""
     service = get_unified_pipeline_service()
     patient_dict = req.model_dump()
     st = stage_id.lower()
@@ -98,8 +98,10 @@ async def run_single_stage(stage_id: str, req: PatientAnalysisRequest):
         return service.run_stage4_slm(patient_dict)
     elif st in ["5", "genai", "stage5"]:
         return service.run_stage5_genai(patient_dict)
+    elif st in ["6", "agentic", "stage6"]:
+        return service.run_stage6_agentic(patient_dict)
     else:
-        raise HTTPException(status_code=400, detail=f"Unknown stage '{stage_id}'. Valid values: 1, 2, 3, 4, 5.")
+        raise HTTPException(status_code=400, detail=f"Unknown stage '{stage_id}'. Valid values: 1, 2, 3, 4, 5, 6.")
 
 
 @router.get("/presets", summary="Get Pre-configured Clinical Patient Presets")
@@ -223,3 +225,30 @@ async def serve_medical_image(cancer_type: str, image_name: str):
         raise HTTPException(status_code=404, detail="Image not found")
 
     return FileResponse(target_path, media_type="image/png")
+
+
+class PatientPdfExportRequest(BaseModel):
+    patient: Dict[str, Any]
+    results: Optional[Dict[str, Any]] = None
+
+
+@router.post("/export-pdf", summary="Export Clinical Tumor Board PDF Report")
+async def export_patient_pdf(req: PatientPdfExportRequest):
+    """Generates an oncologist-grade, downloadable PDF report for the active patient case."""
+    try:
+        from api.services.pdf_report_service import generate_patient_pdf_report
+        pdf_bytes = generate_patient_pdf_report(req.patient, req.results)
+        pid = req.patient.get("patient_id", "PAT-0001")
+        filename = f"TumorBoard_Report_{pid}.pdf"
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f'attachment; filename="{filename}"',
+                "Access-Control-Expose-Headers": "Content-Disposition"
+            }
+        )
+    except Exception as e:
+        logger.error(f"[PDF EXPORT ERROR] {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to generate clinical PDF: {str(e)}")
+

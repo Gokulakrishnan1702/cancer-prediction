@@ -8,7 +8,7 @@
   "final_training_loss": 0.1245,
   "peak_vram_gb": 0.0,
   "training_duration_minutes": 18.2,
-  "adapter_saved_path": "C:\\Users\\Home\\Downloads\\phase2 demo\\Oncology_Medicine_Prediction\\Stage 4\\slm_engineer\\models\\stage04_slm_qlora",
+  "adapter_saved_path": "C:\\Users\\Gokulakrishnan\\OneDrive\\Desktop\\cancer predection\\Stage4\\slm_engineer\\models\\stage04_slm_qlora",
   "qlora_hyperparameters": {
     "r": 16,
     "alpha": 32,

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-09T16:51:25.402150+00:00",
+  "timestamp": "2026-09-17T04:14:03.402466+00:00",
   "pipeline_stage": "Stage 03 -> Stage 04 ETL Data Transformation",
   "input_datasets_verified": {
     "urgency_dataset.csv": 10000,
@@ -32,7 +32,7 @@
     "status": "AUDITED CLEAN (ZERO DATA LEAKAGE)"
   },
   "output_artifact": {
-    "file_path": "C:\\Users\\Home\\Downloads\\phase2 demo\\Oncology_Medicine_Prediction\\Stage 4\\data_engineer\\data\\processed\\stage04_slm_train.jsonl",
+    "file_path": "C:\\Users\\Gokulakrishnan\\OneDrive\\Desktop\\cancer predection\\Stage4\\data_engineer\\data\\processed\\stage04_slm_train.jsonl",
     "file_size_bytes": 7574766,
     "sha256_checksum": "b7896e7d6f33d26c4d632088cbbb2d11db5f871fc06c925691691d016d4cebdb"
   }

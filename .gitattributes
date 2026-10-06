@@ -1,0 +1,15 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Declare binary formats so git never performs line-ending conversions
+*.pdf binary
+*.pkl binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.db binary
+*.sqlite3 binary
+*.pth binary
+*.pt binary
+*.safetensors binary
+*.bin binary

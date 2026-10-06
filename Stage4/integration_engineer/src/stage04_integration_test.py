@@ -28,7 +28,7 @@ _STAGE4_DIR = os.path.dirname(_INTEG_DIR)
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 
-from stage04_guardrails import apply_clinical_triage_guardrail, count_sentences
+from stage04_guardrails import apply_clinical_triage_guardrail, count_sentences, simplify_clinical_text
 
 DEFAULT_STAGE3_INPUTS = os.path.join(_INTEG_DIR, "data", "processed", "stage03_nlp_outputs.json")
 DEFAULT_REPORT_OUT = os.path.join(_INTEG_DIR, "outputs", "stage04_integration_report.json")
@@ -61,29 +61,25 @@ def simulate_or_execute_slm_inference(
 
     if is_boundary_case and escalation_type == "MODERATE_TO_HIGH":
         raw_tier = "MODERATE"
-        action = TIER_ACTIONS["MODERATE"]
     elif is_boundary_case and escalation_type == "LOW_TO_CRITICAL":
         raw_tier = "LOW"
-        action = TIER_ACTIONS["LOW"]
-    elif any(k in note_l for k in ["spo2 < 88", "acute dyspnea", "anaphylaxis", "stridor", "altered mental status"]):
+    elif any(k in note_l for k in ["spo2 < 88", "acute dyspnea", "anaphylaxis", "stridor", "altered mental status", "septic shock", "hypotension", "anc < 300"]):
         raw_tier = "CRITICAL"
-        action = TIER_ACTIONS["CRITICAL"]
-    elif any(k in note_l for k in ["vomiting", "spiking fever", "38.", "dehydration", "neutropenic nadir", "grade 3", "mucosal"]):
+    elif any(k in note_l for k in ["vomiting", "spiking fever", "38.", "dehydration", "neutropenic nadir", "grade 3", "mucosal", "alt 248", "transaminase", "liver injury", "dili"]):
         raw_tier = "HIGH"
-        action = TIER_ACTIONS["HIGH"]
     elif any(k in note_l for k in ["nausea", "diarrhea", "neuropathy", "rash", "mucositis"]):
         raw_tier = "MODERATE"
-        action = TIER_ACTIONS["MODERATE"]
     else:
         raw_tier = "LOW"
-        action = TIER_ACTIONS["LOW"]
 
-
-    sentence1 = (
-        f"Patient {patient_id} ({diagnosis}, {biomarker}) on {regimen} "
-        f"presents with {raw_tier}-tier urgency symptoms detailed as {clinical_note}."
+    return simplify_clinical_text(
+        clinical_note=clinical_note,
+        patient_id=patient_id,
+        diagnosis=diagnosis,
+        biomarker=biomarker,
+        regimen=regimen,
+        tier=raw_tier
     )
-    return f"{sentence1} {action}"
 
 
 def run_integration_pipeline_test(

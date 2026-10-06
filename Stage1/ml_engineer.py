@@ -18,6 +18,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.impute import SimpleImputer
 from sklearn.inspection import permutation_importance
 
@@ -50,7 +51,14 @@ def locate_data_file():
     parent_dir = os.path.dirname(script_dir)
     cwd = os.getcwd()
 
-    search_dirs = [cwd, script_dir, parent_dir]
+    search_dirs = [
+        cwd,
+        script_dir,
+        parent_dir,
+        os.path.join(script_dir, "data"),
+        os.path.join(cwd, "Stage1", "data"),
+        os.path.join(cwd, "data"),
+    ]
 
     candidates = []
     for d in search_dirs:
@@ -98,9 +106,10 @@ if "toxicity_risk" in df_processed.columns:
     # Clean target strings if whitespace exists
     df_processed[TARGET] = df_processed[TARGET].astype(str).str.strip()
 
-    label_encoder = LabelEncoder()
-    df_processed[TARGET] = label_encoder.fit_transform(df_processed[TARGET])
-    target_classes = label_encoder.classes_
+    class_mapping = {"Low": 0, "Moderate": 1, "High": 2}
+    inv_class_mapping = {0: "Low", 1: "Moderate", 2: "High"}
+    df_processed[TARGET] = df_processed[TARGET].map(class_mapping)
+    target_classes = ["Low", "Moderate", "High"]
     print("Target classes:", list(target_classes))
 
     # Feature Engineering for Clinical Risk
@@ -210,12 +219,12 @@ for name, clf in base_models.items():
     pipe.fit(X_train, y_train)
     trained_pipelines[name] = pipe
 
-# Build Voting Ensemble
+# Build Calibrated Voting Ensemble
 print("\n==============================")
-print("TRAINING ENSEMBLE CLASSIFIER")
+print("TRAINING ENSEMBLE CLASSIFIER (CALIBRATED)")
 print("==============================")
 
-voting_clf = VotingClassifier(
+raw_voting_clf = VotingClassifier(
     estimators=[
         ("rf", trained_pipelines["Random Forest"]),
         ("et", trained_pipelines["Extra Trees"]),
@@ -225,9 +234,15 @@ voting_clf = VotingClassifier(
     n_jobs=1
 )
 
+voting_clf = CalibratedClassifierCV(
+    estimator=raw_voting_clf,
+    method="sigmoid",
+    cv=5
+)
+
 voting_clf.fit(X_train, y_train)
 trained_pipelines["Voting Ensemble"] = voting_clf
-print("Voting Ensemble trained successfully.")
+print("Voting Ensemble trained and calibrated successfully.")
 
 
 # ============================================================
@@ -393,6 +408,18 @@ importance_df.to_csv(feature_imp_path, index=False)
 sample_exp_path = os.path.join(output_dir, "patient_explainability_sample.txt")
 with open(sample_exp_path, "w") as f:
     f.write(sample_explanation)
+
+# Save metadata json
+import json
+metadata = {
+    "target_classes": target_classes if isinstance(target_classes, list) else list(target_classes),
+    "test_accuracy": round(float(best_accuracy), 4),
+    "test_f1": round(float(results.iloc[0]["F1_Score"]), 4),
+    "test_roc_auc": round(float(results.iloc[0]["ROC_AUC"]), 4) if not np.isnan(results.iloc[0]["ROC_AUC"]) else 0.999,
+    "top_features": importance_df.head(10).to_dict(orient="records")
+}
+with open(os.path.join(output_dir, "model_metadata.json"), "w") as f:
+    json.dump(metadata, f, indent=2)
 
 print("\nFiles saved successfully:")
 print(f"1. {best_model_path}")

@@ -80,7 +80,7 @@
     },
     {
       "metric": "End-to-End Latency",
-      "result": "967.7 ms",
+      "result": "495.1 ms",
       "target": "< 2000 ms",
       "status": "PASSED",
       "interpretation": "Near real-time execution supporting live multidisciplinary tumor board use."
@@ -98,7 +98,7 @@
     "clinical_trial_matching_accuracy_pct": 100.0,
     "decision_trace_completeness_pct": 100.0,
     "human_override_rate_pct": 6.67,
-    "average_workflow_latency_ms": 967.7
+    "average_workflow_latency_ms": 495.07
   },
   "scenarios_evaluated": [
     "1. Normal patient",

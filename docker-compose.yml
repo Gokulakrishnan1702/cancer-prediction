@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  cdss-platform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oncology-cdss-workstation
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+    volumes:
+      # Mount persistent SQLite and ChromaDB volumes
+      - ./stage_05_generative/data:/app/stage_05_generative/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
